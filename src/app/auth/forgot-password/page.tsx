@@ -2,7 +2,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -17,7 +16,6 @@ export default function ForgotPasswordPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
-  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -51,31 +49,31 @@ export default function ForgotPasswordPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent text-[--text-primary]">
         <Header/>
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-md mx-auto">
-            <Card>
+            <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
               <CardContent className="pt-6">
                 <div className="text-center space-y-4">
-                  <CheckCircle className="h-12 w-12 text-semantic-success mx-auto"/>
-                  <h2 className="text-2xl font-bold">Check Your Email</h2>
-                  <p className="text-muted-foreground">
-                    We&apos;ve sent a password reset link to <strong>{email}</strong>.
-                    Please check your email and follow the instructions to reset your password.
+                  <CheckCircle className="h-12 w-12 text-[--color-success] mx-auto"/>
+                  <h2 className="text-3xl heading-anton">Check Your Email</h2>
+                  <p className="text-[--text-secondary] body-share-tech">
+                    We&apos;ve sent a password reset link to <strong>{email}</strong>. Please check your email and follow the instructions to reset your password.
                   </p>
-                  <div className="space-y-2">
-                    <p className="text-sm text-muted-foreground">
+                  <div className="space-y-2 text-sm text-[--text-secondary]">
+                    <p>
                       Didn&apos;t receive the email? Check your spam folder or{' '}
                       <Button
                         onClick={() => setSuccess(false)}
-                        className="text-accent-primary hover:underline"
+                        variant="ghost"
+                        className="px-1 text-[--color-accent-primary] hover:underline"
                       >
                         try again
                       </Button>
                     </p>
                   </div>
-                  <Button asChild>
+                  <Button asChild className="h-11 rounded-full bg-[--color-accent-primary] text-black">
                     <Link href="/auth/login">
                       <ArrowLeft className="h-4 w-4 mr-2"/>
                       Back to Sign In
@@ -91,25 +89,22 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
       <Header/>
 
-      {/* Forgot Password Form */}
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-md mx-auto">
-          <Card>
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl">Forgot Your Password?</CardTitle>
-              <CardDescription>
+          <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
+            <CardHeader className="text-center space-y-2">
+              <CardTitle className="text-3xl leading-tight heading-anton">Forgot Your Password?</CardTitle>
+              <CardDescription className="text-[--text-secondary] body-share-tech">
                 Enter your email address and we&apos;ll send you a link to reset your password
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-5">
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Organization Slug */}
                 <div className="space-y-2">
-                  <Label htmlFor="organization">Organization</Label>
+                  <Label htmlFor="organization" className="text-[--text-secondary] body-share-tech">Organization</Label>
                   <Input
                     id="organization"
                     type="text"
@@ -119,9 +114,8 @@ export default function ForgotPasswordPage() {
                     required/>
                 </div>
 
-                {/* Email */}
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
+                  <Label htmlFor="email" className="text-[--text-secondary] body-share-tech">Email Address</Label>
                   <Input
                     id="email"
                     type="email"
@@ -131,32 +125,33 @@ export default function ForgotPasswordPage() {
                     required/>
                 </div>
 
-                {/* Error Message */}
                 {error && (
-                  <div className="flex items-center space-x-2 text-sm text-destructive bg-destructive/10 p-3 rounded">
+                  <div className="flex items-center space-x-2 text-sm text-[--color-error] bg-[--color-error-light] p-3 rounded">
                     <AlertCircle className="h-4 w-4"/>
                     <span>{error}</span>
                   </div>
                 )}
 
-                {/* Submit Button */}
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button
+                  type="submit"
+                  className="w-full h-11 rounded-full bg-[--color-accent-primary] text-black shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5"
+                  disabled={isLoading}
+                >
                   {isLoading ? 'Sending Reset Link...' : 'Send Reset Link'}
                 </Button>
               </form>
 
-              {/* Links */}
-              <div className="text-center space-y-2 pt-4 border-t">
+              <div className="text-center space-y-2 pt-4 border-t border-[--border-default]">
                 <Link
                   href="/auth/login"
-                  className="text-sm text-accent-primary hover:underline flex items-center justify-center"
+                  className="text-sm text-[--color-accent-primary] hover:underline flex items-center justify-center"
                 >
                   <ArrowLeft className="h-4 w-4 mr-2"/>
                   Back to Sign In
                 </Link>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm text-[--text-secondary]">
                   Don&apos;t have an account?{' '}
-                  <Link href="/auth/signup" className="text-accent-primary hover:underline">
+                  <Link href="/auth/signup" className="text-[--color-accent-primary] hover:underline">
                     Sign up
                   </Link>
                 </div>

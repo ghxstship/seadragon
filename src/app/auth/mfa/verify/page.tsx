@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Badge } from "@/components/ui/badge"
 import { Header } from "@/lib/design-system"
 import { Shield, Smartphone, Key, AlertTriangle, CheckCircle, RefreshCw, Clock, ArrowLeft } from "lucide-react"
 
@@ -24,11 +23,11 @@ export default function MFAVerifyPage() {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
   // MFA method - in real app this would come from session/state
-  const [mfaMethod, setMfaMethod] = useState<'authenticator' | 'sms'>('authenticator')
-  const [methodDetails, setMethodDetails] = useState({
+  const [mfaMethod] = useState<'authenticator' | 'sms'>('authenticator')
+  const methodDetails = {
     authenticator: { app: 'Google Authenticator', device: 'iPhone' },
     sms: { number: '+1 (555) 123-4567' }
-  })
+  }
 
   useEffect(() => {
     // Auto-focus first input
@@ -130,18 +129,21 @@ export default function MFAVerifyPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent text-[--text-primary]">
         <Header/>
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-md mx-auto">
-            <Card>
+            <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
               <CardContent className="pt-6">
                 <div className="text-center space-y-4">
-                  <CheckCircle className="h-12 w-12 text-semantic-success mx-auto"/>
-                  <h2 className="text-2xl font-bold">Verification Successful</h2>
-                  <p className="text-muted-foreground">
+                  <CheckCircle className="h-12 w-12 text-[--color-accent-primary] mx-auto"/>
+                  <h2 className="text-2xl heading-anton">Verification Successful</h2>
+                  <p className="text-[--text-secondary] body-share-tech">
                     Your account has been verified. Redirecting to dashboard...
                   </p>
+                  <Button asChild className="h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] hover:-translate-y-0.5 transition">
+                    <Link href="/dashboard">Go to Dashboard</Link>
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -152,19 +154,19 @@ export default function MFAVerifyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
       {/* Header */}
       <Header/>
 
       {/* Breadcrumb */}
-      <nav className="bg-muted/50 px-4 py-3">
+      <nav className="bg-[--surface-default]/70 backdrop-blur border-b border-[--border-default] px-4 py-3">
         <div className="container mx-auto">
-          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground">Home</Link>
+          <div className="flex items-center space-x-2 text-sm text-[--text-secondary]">
+            <Link href="/" className="hover:text-[--text-primary]">Home</Link>
             <span>/</span>
-            <Link href="/auth/login" className="hover:text-foreground">Sign In</Link>
+            <Link href="/auth/login" className="hover:text-[--text-primary]">Sign In</Link>
             <span>/</span>
-            <span className="text-foreground font-medium">Verify Code</span>
+            <span className="text-[--text-primary] font-medium">Verify Code</span>
           </div>
         </div>
       </nav>
@@ -173,11 +175,11 @@ export default function MFAVerifyPage() {
         <div className="max-w-lg mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-accent-primary/20 rounded-full mb-6">
-              <Shield className="h-10 w-10 text-accent-primary"/>
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-[--color-accent-primary]/15 rounded-full mb-6">
+              <Shield className="h-10 w-10 text-[--color-accent-primary]"/>
             </div>
-            <h1 className="text-4xl font-display font-bold mb-4">Enter Security Code</h1>
-            <p className="text-xl text-muted-foreground max-w-md mx-auto">
+            <h1 className="text-4xl heading-anton mb-4">Enter Security Code</h1>
+            <p className="text-xl text-[--text-secondary] body-share-tech max-w-md mx-auto">
               Enter the 6-digit code from your {mfaMethod === 'authenticator' ? 'authenticator app' : 'SMS'}
             </p>
           </div>
@@ -185,19 +187,19 @@ export default function MFAVerifyPage() {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Verification Form */}
             <div className="lg:col-span-2">
-              <Card>
+              <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
                 <CardHeader>
-                  <CardTitle className="flex items-center">
+                  <CardTitle className="flex items-center heading-anton">
                     <Key className="h-5 w-5 mr-2"/>
                     Verification Code
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-[--text-secondary] body-share-tech">
                     Enter the code sent to your {mfaMethod === 'authenticator' ? 'authenticator app' : 'phone'}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   {/* Method Info */}
-                  <div className="mb-6 p-4 bg-muted/50 rounded-lg">
+                  <div className="mb-6 p-4 bg-[--surface-hover] rounded-lg border border-[--border-default]">
                     <div className="flex items-center space-x-3">
                       <div className="p-2 bg-accent-primary/10 rounded-full">
                         {mfaMethod === 'authenticator' ? (

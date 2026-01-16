@@ -6,10 +6,9 @@ import { logger } from '@/lib/logger'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { LogOut, Shield, Clock, Smartphone, AlertTriangle, CheckCircle, ArrowLeft, Monitor } from "lucide-react"
+import { LogOut, Shield, Clock, CheckCircle, ArrowLeft, Monitor } from "lucide-react"
 import Link from "next/link"
+import { Header } from '@/lib/design-system'
 
 export const metadata: Metadata = {
   title: 'Sign Out | ATLVS + GVTEWAY',
@@ -32,9 +31,9 @@ export default async function LogoutPage({ searchParams }: LogoutPageProps) {
   }
 
   // Handle auto-logout if requested
-  if (resolvedSearchParams?.auto === 'true') {
+  if (resolvedSearchParams?.['auto'] === 'true') {
     try {
-      await signOut({ redirect: false })
+      await signOut()
       redirect('/auth/login?message=logged_out')
     } catch (error) {
       logger.error('Auto logout failed', error)
@@ -45,10 +44,8 @@ export default async function LogoutPage({ searchParams }: LogoutPageProps) {
     'use server'
 
     try {
-      await signOut({
-        redirectTo: '/auth/login?message=signed_out_successfully',
-        redirect: true
-      })
+      await signOut()
+      redirect('/auth/login?message=signed_out_successfully')
     } catch (error) {
       logger.error('Sign out error', error)
       // In a real app, you might want to handle this error
@@ -85,59 +82,57 @@ export default async function LogoutPage({ searchParams }: LogoutPageProps) {
   ]
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <h1 className="text-2xl font-display font-bold">ATLVS + COMPVSS Dashboard</h1>
-            </div>
-            <Link href="/dashboard" className="text-sm text-muted-foreground hover:text-foreground">
-              <ArrowLeft className="h-4 w-4 mr-1 inline"/>
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
+      <Header/>
+
+      <nav className="bg-[--surface-default]/70 backdrop-blur border-b border-[--border-default] px-4 py-3">
+        <div className="container mx-auto">
+          <div className="flex items-center space-x-2 text-sm text-[--text-secondary]">
+            <Link href="/dashboard" className="hover:text-[--text-primary]">
+              <ArrowLeft className="h-4 w-4 mr-2 inline"/>
               Back to Dashboard
             </Link>
           </div>
         </div>
-      </header>
+      </nav>
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-2xl mx-auto">
+      <div className="container mx-auto px-4 py-12 sm:py-16">
+        <div className="max-w-2xl mx-auto space-y-8">
           {/* Sign Out Confirmation */}
-          <Card className="mb-8">
+          <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
             <CardHeader>
-              <CardTitle className="flex items-center">
-                <LogOut className="h-6 w-6 mr-3 text-semantic-error"/>
+              <CardTitle className="flex items-center heading-anton">
+                <LogOut className="h-6 w-6 mr-3 text-[--color-accent-primary]"/>
                 Sign Out Confirmation
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-[--text-secondary] body-share-tech">
                 You&apos;re about to sign out of your ATLVS + GVTEWAY account
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-semantic-error/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <LogOut className="h-8 w-8 text-semantic-error"/>
+                <div className="w-16 h-16 bg-[--color-accent-primary]/15 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <LogOut className="h-8 w-8 text-[--color-accent-primary]"/>
                 </div>
-                <h2 className="text-xl font-semibold mb-2">Are you sure you want to sign out?</h2>
-                <p className="text-muted-foreground">
+                <h2 className="text-2xl heading-anton mb-2">Are you sure you want to sign out?</h2>
+                <p className="text-[--text-secondary] body-share-tech">
                   You will be signed out of your account on this device. Any unsaved work may be lost.
                 </p>
               </div>
 
-              <div className="bg-muted/50 p-4 rounded-lg mb-6">
+              <div className="bg-[--surface-hover] p-4 rounded-lg mb-6 border border-[--border-default]">
                 <div className="flex items-center space-x-3 mb-2">
-                  <div className="w-8 h-8 bg-accent-primary rounded-full flex items-center justify-center">
-                    <span className="text-primary-foreground font-semibold text-sm">
+                  <div className="w-8 h-8 bg-[--color-accent-primary] rounded-full flex items-center justify-center">
+                    <span className="text-white font-semibold text-sm">
                       {user?.name?.charAt(0).toUpperCase() || 'U'}
                     </span>
                   </div>
                   <div>
-                    <p className="font-medium">{user?.name}</p>
-                    <p className="text-sm text-muted-foreground">{user?.email}</p>
+                    <p className="font-medium heading-anton text-sm">{user?.name}</p>
+                    <p className="text-sm text-[--text-secondary] body-share-tech">{user?.email}</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                <div className="flex items-center space-x-4 text-sm text-[--text-secondary] body-share-tech">
                   <span>Role: {user?.role || 'Member'}</span>
                   <span>•</span>
                   <span>Last login: {new Date().toLocaleDateString()}</span>
@@ -148,14 +143,13 @@ export default async function LogoutPage({ searchParams }: LogoutPageProps) {
                 <form action={handleSignOut} className="flex-1">
                   <Button
                     type="submit"
-                    variant="destructive"
-                    className="w-full"
+                    className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5"
                   >
                     <LogOut className="h-4 w-4 mr-2"/>
                     Sign Out
                   </Button>
                 </form>
-                <Button variant="outline" asChild className="flex-1">
+                <Button variant="outline" asChild className="flex-1 h-11 rounded-full border-[--border-default] bg-[--surface-default] text-[--text-primary]">
                   <Link href="/dashboard">
                     Cancel
                   </Link>
@@ -165,61 +159,51 @@ export default async function LogoutPage({ searchParams }: LogoutPageProps) {
           </Card>
 
           {/* Security Information */}
-          <Alert className="mb-6">
+          <Alert className="mb-6 border-[--border-default] bg-[--surface-default]/80">
             <Shield className="h-4 w-4"/>
-            <AlertTitle>Security Reminder</AlertTitle>
-            <AlertDescription>
+            <AlertTitle className="heading-anton">Security Reminder</AlertTitle>
+            <AlertDescription className="text-[--text-secondary] body-share-tech">
               For your security, we recommend signing out when using shared or public devices.
               You can sign back in anytime with your email and password.
             </AlertDescription>
           </Alert>
 
           {/* Active Sessions */}
-          <Card className="mb-6">
+          <Card className="border border-[--border-default] bg-[--surface-default]/80 shadow-[0_8px_22px_rgba(0,0,0,0.07)] backdrop-blur">
             <CardHeader>
-              <CardTitle className="flex items-center">
+              <CardTitle className="flex items-center heading-anton">
                 <Monitor className="h-5 w-5 mr-2"/>
                 Active Sessions
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-[--text-secondary] body-share-tech">
                 Devices where you&apos;re currently signed in
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {activeSessions.map((session, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
+                  <div key={index} className="flex items-center justify-between p-4 border border-[--border-default] rounded-lg bg-[--surface-default]">
                     <div className="flex items-center space-x-3">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                        session.isCurrent ? 'bg-accent-primary text-primary-foreground' : 'bg-muted'
+                        session.isCurrent ? 'bg-[--color-accent-primary] text-white' : 'bg-[--surface-hover] text-[--text-secondary]'
                       }`}>
-                        {session.type === 'Desktop' && ''}
-                        {session.type === 'Mobile' && ''}
-                        {session.type === 'Laptop' && ''}
+                        {session.isCurrent ? '•' : ''}
                       </div>
                       <div>
-                        <p className="font-medium">{session.name}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {session.location} • {session.type}
-                        </p>
+                        <p className="font-medium text-[--text-primary]">{session.name}</p>
+                        <p className="text-sm text-[--text-secondary] body-share-tech">{session.type}</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      {session.isCurrent && (
-                        <Badge variant="default" className="mb-1">Current</Badge>
-                      )}
-                      <p className="text-sm text-muted-foreground">
-                        {session.lastActive}
-                      </p>
+                    <div className="text-right text-sm text-[--text-secondary] body-share-tech">
+                      <p>{session.location}</p>
+                      <p>Last active: {session.lastActive}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <Separator className="my-4"/>
-
-              <div className="text-center">
-                <Button variant="outline" size="sm">
+              <div className="text-center pt-2">
+                <Button variant="outline" size="sm" className="rounded-full border-[--border-default] bg-[--surface-default] text-[--text-primary]">
                   Manage All Sessions
                 </Button>
               </div>
@@ -258,21 +242,19 @@ export default async function LogoutPage({ searchParams }: LogoutPageProps) {
                 </div>
               </div>
 
-              <Separator className="my-6"/>
-
-              <div className="text-center space-y-4">
-                <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
+              <div className="text-center space-y-4 pt-4 border-t border-[--border-default] mt-6">
+                <div className="flex items-center justify-center space-x-2 text-sm text-[--text-secondary] body-share-tech">
                   <Clock className="h-4 w-4"/>
                   <span>You&apos;ll be redirected to the login page after signing out</span>
                 </div>
 
-                <div className="flex space-x-3">
-                  <Button variant="ghost" size="sm" asChild>
+                <div className="flex space-x-3 justify-center">
+                  <Button variant="ghost" size="sm" asChild className="text-[--text-primary]">
                     <Link href="/support/account-security">
                       Account Security Help
                     </Link>
                   </Button>
-                  <Button variant="ghost" size="sm" asChild>
+                  <Button variant="ghost" size="sm" asChild className="text-[--text-primary]">
                     <Link href="/support/contact">
                       Contact Support
                     </Link>

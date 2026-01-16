@@ -360,7 +360,7 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
       {/* Header */}
       <Header/>
 
@@ -373,22 +373,22 @@ export default function OnboardingPage() {
               {steps.map((step, index) => (
                 <div key={step.id} className="flex items-center">
                   <div className={`flex items-center justify-center w-8 h-8 rounded-full ${
-                    index <= currentStep ? 'bg-accent-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
+                    index <= currentStep ? 'bg-[--color-accent-primary] text-white' : 'bg-[--surface-hover] text-[--text-secondary]'
                   }`}>
                     <step.icon className="h-4 w-4"/>
                   </div>
                   {index < steps.length - 1 && (
                     <div className={`w-12 h-0.5 mx-2 ${
-                      index < currentStep ? 'bg-accent-primary' : 'bg-muted'
+                      index < currentStep ? 'bg-[--color-accent-primary]' : 'bg-[--border-default]'
                     }`}/>
                   )}
                 </div>
               ))}
             </div>
             <Progress value={progress} className="w-full"/>
-            <div className="flex justify-between text-xs text-muted-foreground mt-2">
+            <div className="flex justify-between text-xs text-[--text-secondary] mt-2">
               {steps.map((step, index) => (
-                <span key={step.id} className={index === currentStep ? 'font-medium' : ''}>
+                <span key={step.id} className={index === currentStep ? 'font-medium text-[--text-primary]' : ''}>
                   {step.title}
                 </span>
               ))}
@@ -396,7 +396,7 @@ export default function OnboardingPage() {
           </div>
 
           {/* Step Content */}
-          <Card>
+          <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
             <CardContent className="pt-6">
               {renderStepContent()}
 
@@ -406,16 +406,17 @@ export default function OnboardingPage() {
                   variant="outline"
                   onClick={prevStep}
                   disabled={currentStep === 0}
+                  className="rounded-full h-11 border-[--border-default] bg-[--surface-default] text-[--text-primary]"
                 >
                   Previous
                 </Button>
 
                 {currentStep === steps.length - 1 ? (
-                  <Button onClick={handleSubmit} disabled={isLoading}>
+                  <Button onClick={handleSubmit} disabled={isLoading} className="rounded-full h-11 bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] hover:-translate-y-0.5 transition">
                     {isLoading ? 'Completing...' : 'Get Started'}
                   </Button>
                 ) : (
-                  <Button onClick={nextStep}>
+                  <Button onClick={nextStep} className="rounded-full h-11 bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] hover:-translate-y-0.5 transition">
                     Next
                   </Button>
                 )}

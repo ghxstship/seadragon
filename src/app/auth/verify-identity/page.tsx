@@ -1,13 +1,12 @@
 
 'use client'
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from 'next/navigation'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Image from "next/image"
@@ -15,7 +14,6 @@ import { Checkbox } from "@/components/ui/checkbox"
 import {
   Upload,
   CheckCircle,
-  CheckCircle2,
   FileText,
   Shield,
   Camera,
@@ -25,10 +23,8 @@ import {
   CreditCard,
   UserCheck,
   Home,
-  ArrowLeft,
-  Lock
+  ArrowLeft
 } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Progress } from "@/components/ui/progress"
 import { Header } from "@/lib/design-system"
@@ -129,7 +125,7 @@ export default function VerifyIdentityPage() {
     setError('')
 
     // Validate required fields
-    if (!formData.firstName || !formData.lastName || !formData.documentType || !documents[0].uploaded) {
+    if (!formData.firstName || !formData.lastName || !formData.documentType || !(documents[0]?.uploaded)) {
       setError('Please fill in all required fields and upload at least one document')
       setIsSubmitting(false)
       return
@@ -148,9 +144,9 @@ export default function VerifyIdentityPage() {
       setVerificationStatus({
         overall: 'in_progress',
         documents: {
-          id: documents[0].uploaded,
-          address: documents[1].uploaded,
-          additional: documents[2].uploaded
+          id: Boolean(documents[0]?.uploaded),
+          address: Boolean(documents[1]?.uploaded),
+          additional: Boolean(documents[2]?.uploaded)
         },
         submittedAt: new Date(),
         estimatedCompletion: new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours
@@ -165,16 +161,6 @@ export default function VerifyIdentityPage() {
       setError('Failed to submit verification. Please try again.')
     } finally {
       setIsSubmitting(false)
-    }
-  }
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'approved': return 'text-semantic-success'
-      case 'pending_review': return 'text-semantic-warning'
-      case 'in_progress': return 'text-accent-secondary'
-      case 'rejected': return 'text-semantic-error'
-      default: return 'text-neutral-600'
     }
   }
 
@@ -213,19 +199,19 @@ export default function VerifyIdentityPage() {
 
   if (verificationStatus.overall === 'approved') {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent text-[--text-primary]">
         <Header/>
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-md mx-auto">
-            <Card>
+            <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
               <CardContent className="pt-6">
                 <div className="text-center space-y-4">
-                  <CheckCircle className="h-12 w-12 text-semantic-success mx-auto"/>
-                  <h2 className="text-2xl font-bold">Identity Verified!</h2>
-                  <p className="text-muted-foreground">
+                  <CheckCircle className="h-12 w-12 text-[--color-accent-primary] mx-auto"/>
+                  <h2 className="text-2xl heading-anton">Identity Verified!</h2>
+                  <p className="text-[--text-secondary] body-share-tech">
                     Your identity has been successfully verified. You now have access to all premium features.
                   </p>
-                  <Button asChild>
+                  <Button asChild className="h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] hover:-translate-y-0.5 transition">
                     <Link href="/dashboard">Continue to Dashboard</Link>
                   </Button>
                 </div>
@@ -239,48 +225,48 @@ export default function VerifyIdentityPage() {
 
   if (verificationStatus.overall === 'in_progress' || verificationStatus.overall === 'pending_review') {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent text-[--text-primary]">
         <Header/>
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-md mx-auto">
-            <Card>
+            <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
               <CardHeader>
-                <CardTitle className="flex items-center">
+                <CardTitle className="flex items-center heading-anton">
                   {getStatusIcon(verificationStatus.overall)}
                   <span className="ml-2">
                     {verificationStatus.overall === 'in_progress' ? 'Verification In Progress' : 'Pending Review'}
                   </span>
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-[--text-secondary] body-share-tech">
                   We&apos;re processing your identity verification documents
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
                   <div>
-                    <div className="flex justify-between text-sm mb-2">
+                    <div className="flex justify-between text-sm text-[--text-secondary] body-share-tech mb-2">
                       <span>Verification Progress</span>
                       <span>75%</span>
                     </div>
                     <Progress value={75} className="w-full"/>
                   </div>
 
-                  <div className="space-y-3">
+                  <div className="space-y-3 text-[--text-secondary] body-share-tech">
                     <div className="flex items-center space-x-3">
-                      <CheckCircle className="h-4 w-4 text-semantic-success"/>
+                      <CheckCircle className="h-4 w-4 text-[--color-accent-primary]"/>
                       <span className="text-sm">Documents received</span>
                     </div>
                     <div className="flex items-center space-x-3">
-                      <CheckCircle className="h-4 w-4 text-semantic-success"/>
+                      <CheckCircle className="h-4 w-4 text-[--color-accent-primary]"/>
                       <span className="text-sm">Information validated</span>
                     </div>
                     <div className="flex items-center space-x-3">
-                      <Clock className="h-4 w-4 text-semantic-warning"/>
+                      <Clock className="h-4 w-4 text-[--text-secondary]"/>
                       <span className="text-sm">Manual review in progress</span>
                     </div>
                   </div>
 
-                  <div className="bg-muted/50 p-4 rounded-lg">
+                  <div className="p-4 rounded-lg bg-[--surface-hover] border border-[--border-default] text-[--text-secondary] body-share-tech">
                     <p className="text-sm">
                       <strong>Estimated completion:</strong>{' '}
                       {verificationStatus.estimatedCompletion?.toLocaleDateString()}
@@ -290,7 +276,7 @@ export default function VerifyIdentityPage() {
                     </p>
                   </div>
 
-                  <Button asChild className="w-full">
+                  <Button asChild className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] hover:-translate-y-0.5 transition">
                     <Link href="/dashboard">Return to Dashboard</Link>
                   </Button>
                 </div>
@@ -303,19 +289,19 @@ export default function VerifyIdentityPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
       {/* Header */}
       <Header/>
 
       {/* Breadcrumb */}
-      <nav className="bg-muted/50 px-4 py-3">
+      <nav className="bg-[--surface-default]/70 backdrop-blur border-b border-[--border-default] px-4 py-3">
         <div className="container mx-auto">
-          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground">Home</Link>
+          <div className="flex items-center space-x-2 text-sm text-[--text-secondary]">
+            <Link href="/" className="hover:text-[--text-primary]">Home</Link>
             <span>/</span>
-            <Link href="/dashboard" className="hover:text-foreground">Dashboard</Link>
+            <Link href="/dashboard" className="hover:text-[--text-primary]">Dashboard</Link>
             <span>/</span>
-            <span className="text-foreground font-medium">Verify Identity</span>
+            <span className="text-[--text-primary] font-medium">Verify Identity</span>
           </div>
         </div>
       </nav>
@@ -324,11 +310,11 @@ export default function VerifyIdentityPage() {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-accent-primary/20 rounded-full mb-6">
-              <Shield className="h-10 w-10 text-accent-primary"/>
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-[--color-accent-primary]/15 rounded-full mb-6">
+              <Shield className="h-10 w-10 text-[--color-accent-primary]"/>
             </div>
-            <h1 className="text-4xl font-display font-bold mb-4">Identity Verification</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <h1 className="text-4xl heading-anton mb-4">Identity Verification</h1>
+            <p className="text-xl text-[--text-secondary] body-share-tech max-w-2xl mx-auto">
               Complete identity verification to access premium features and ensure maximum account security
             </p>
           </div>
@@ -336,10 +322,10 @@ export default function VerifyIdentityPage() {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Form */}
             <div className="lg:col-span-2">
-              <Card>
+              <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
                 <CardHeader>
-                  <CardTitle>Personal Information</CardTitle>
-                  <CardDescription>
+                  <CardTitle className="heading-anton">Personal Information</CardTitle>
+                  <CardDescription className="text-[--text-secondary] body-share-tech">
                     Please provide your personal details for verification
                   </CardDescription>
                 </CardHeader>
@@ -412,15 +398,15 @@ export default function VerifyIdentityPage() {
                     {/* Document Uploads */}
                     <div className="space-y-6">
                       <div>
-                        <Label className="text-base font-semibold">Government-Issued ID *</Label>
-                        <p className="text-sm text-muted-foreground mb-4">
+                        <Label className="text-base font-semibold text-[--text-primary]">Government-Issued ID *</Label>
+                        <p className="text-sm text-[--text-secondary] body-share-tech mb-4">
                           Upload a clear photo or scan of your government-issued identification
                         </p>
-                        <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center">
-                          {documents[0].preview ? (
+                        <div className="border-2 border-dashed border-[--border-default] rounded-lg p-6 text-center bg-[--surface-hover]">
+                          {documents[0]?.preview ? (
                             <div className="space-y-4">
                               <Image
-                                src={documents[0].preview}
+                                src={documents[0]?.preview as string}
                                 alt="ID Preview"
                                 width={384}
                                 height={384}
@@ -456,43 +442,31 @@ export default function VerifyIdentityPage() {
                             </div>
                           ) : (
                             <>
-                              <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground"/>
+                              <Upload className="h-6 w-6 text-muted-foreground"/>
                               <div className="space-y-2">
                                 <p className="text-sm font-medium">Upload ID Document</p>
                                 <p className="text-xs text-muted-foreground">
                                   PNG, JPG, PDF up to 10MB
                                 </p>
                               </div>
-                              <Button
-                                variant="outline"
-                                onClick={() => {
-                                  const input = document.createElement('input')
-                                  input.type = 'file'
-                                  input.accept = 'image/*,.pdf'
-                                  input.onchange = (e) => {
-                                    const file = (e.target as HTMLInputElement).files?.[0]
-                                    if (file) handleFileUpload('id', file)
-                                  }
-                                  input.click()
-                                }}
-                              >
-                                Choose File
-                              </Button>
+                              <label className="text-sm font-medium text-accent-primary cursor-pointer">
+                                Browse Files
+                              </label>
                             </>
                           )}
                         </div>
                       </div>
 
                       <div>
-                        <Label className="text-base font-semibold">Proof of Address (Optional)</Label>
-                        <p className="text-sm text-muted-foreground mb-4">
-                          Upload a recent utility bill, bank statement, or other proof of address
+                        <Label className="text-base font-semibold text-[--text-primary]">Proof of Address (Optional)</Label>
+                        <p className="text-sm text-[--text-secondary] body-share-tech mb-4">
+                          Provide a document that confirms your current address
                         </p>
-                        <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center">
-                          {documents[1].preview ? (
+                        <div className="border-2 border-dashed border-[--border-default] rounded-lg p-6 text-center bg-[--surface-hover]">
+                          {documents[1]?.preview ? (
                             <div className="space-y-4">
                               <Image
-                                src={documents[1].preview}
+                                src={documents[1]?.preview as string}
                                 alt="Address Proof Preview"
                                 width={384}
                                 height={384}
@@ -528,28 +502,16 @@ export default function VerifyIdentityPage() {
                             </div>
                           ) : (
                             <>
-                              <Home className="h-12 w-12 mx-auto mb-4 text-muted-foreground"/>
+                              <Home className="h-6 w-6 text-muted-foreground"/>
                               <div className="space-y-2">
                                 <p className="text-sm font-medium">Upload Proof of Address</p>
                                 <p className="text-xs text-muted-foreground">
                                   PNG, JPG, PDF up to 10MB
                                 </p>
                               </div>
-                              <Button
-                                variant="outline"
-                                onClick={() => {
-                                  const input = document.createElement('input')
-                                  input.type = 'file'
-                                  input.accept = 'image/*,.pdf'
-                                  input.onchange = (e) => {
-                                    const file = (e.target as HTMLInputElement).files?.[0]
-                                    if (file) handleFileUpload('address', file)
-                                  }
-                                  input.click()
-                                }}
-                              >
-                                Choose File
-                              </Button>
+                              <label className="text-sm font-medium text-accent-primary cursor-pointer">
+                                Browse Files
+                              </label>
                             </>
                           )}
                         </div>
@@ -557,28 +519,18 @@ export default function VerifyIdentityPage() {
                     </div>
 
                     {/* Consent */}
-                    <div className="flex items-start space-x-3">
-                      <Checkbox
-                        id="consent"
-                        checked={formData.consent}
-                        onCheckedChange={(checked: boolean | "indeterminate") =>
-                          setFormData(prev => ({ ...prev, consent: checked === true }))
-                        }/>
-                      <div className="text-sm">
-                        <Label htmlFor="consent" className="text-sm font-medium">
-                          I consent to the collection and processing of my personal information *
+                    <div className="space-y-3">
+                      <p className="text-sm text-[--text-secondary] body-share-tech">We will securely review your documents to verify your identity.</p>
+                      <div className="flex items-start space-x-3">
+                        <Checkbox
+                          id="consent"
+                          checked={formData.consent}
+                          onCheckedChange={(checked: boolean | "indeterminate") =>
+                            setFormData(prev => ({ ...prev, consent: checked === true }))
+                          }/>
+                        <Label htmlFor="consent" className="text-sm text-[--text-secondary] body-share-tech">
+                          I consent to the processing of my personal information for verification purposes
                         </Label>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          By submitting this form, I agree to the{' '}
-                          <Link href="/legal/privacy" className="text-accent-primary hover:underline">
-                            Privacy Policy
-                          </Link>{' '}
-                          and{' '}
-                          <Link href="/legal/terms" className="text-accent-primary hover:underline">
-                            Terms of Service
-                          </Link>
-                          . My information will be used solely for identity verification purposes.
-                        </p>
                       </div>
                     </div>
 
@@ -593,8 +545,8 @@ export default function VerifyIdentityPage() {
 
                     {/* Submit Button */}
                     <div className="flex space-x-3">
-                      <Button type="submit" className="flex-1" disabled={isSubmitting}>
-                        {isSubmitting ? 'Submitting...' : 'Submit for Verification'}
+                      <Button type="submit" disabled={isSubmitting} className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5">
+                        {isSubmitting ? 'Submitting...' : 'Submit Verification'}
                       </Button>
                       <Button variant="outline" asChild>
                         <Link href="/dashboard">
@@ -610,74 +562,77 @@ export default function VerifyIdentityPage() {
 
             {/* Sidebar */}
             <div className="space-y-6">
-              {/* Benefits */}
-              <Card>
+              <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_8px_22px_rgba(0,0,0,0.07)] backdrop-blur">
                 <CardHeader>
-                  <CardTitle>Verification Benefits</CardTitle>
+                  <CardTitle className="heading-anton">Why verify your identity?</CardTitle>
+                  <CardDescription className="text-[--text-secondary] body-share-tech">
+                    Benefits of completing identity verification
+                  </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {verificationBenefits.map((benefit, index) => (
-                      <div key={index} className="flex items-start space-x-3">
-                        <div className="p-2 bg-accent-primary/10 rounded-lg">
-                          <benefit.icon className="h-4 w-4 text-accent-primary"/>
-                        </div>
-                        <div>
-                          <h4 className="font-medium text-sm">{benefit.title}</h4>
-                          <p className="text-xs text-muted-foreground">{benefit.description}</p>
-                        </div>
+                <CardContent className="space-y-4">
+                  {verificationBenefits.map((benefit) => (
+                    <div key={benefit.title} className="flex items-start space-x-3">
+                      <div className="mt-1">
+                        <benefit.icon className="h-5 w-5 text-[--color-accent-primary]"/>
                       </div>
-                    ))}
+                      <div>
+                        <p className="font-medium text-[--text-primary]">{benefit.title}</p>
+                        <p className="text-sm text-[--text-secondary] body-share-tech">{benefit.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+
+              <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_8px_22px_rgba(0,0,0,0.07)] backdrop-blur">
+                <CardHeader>
+                  <CardTitle className="heading-anton">Helpful Tips</CardTitle>
+                  <CardDescription className="text-[--text-secondary] body-share-tech">
+                    Ensure a smooth verification process
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3 text-[--text-secondary] body-share-tech">
+                  <div className="flex items-start space-x-3">
+                    <Camera className="h-4 w-4 text-[--color-accent-primary] mt-0.5"/>
+                    <div>
+                      <p className="font-medium text-[--text-primary]">Use a clear photo</p>
+                      <p className="text-sm">Ensure your document photo is well-lit and readable.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <AlertCircle className="h-4 w-4 text-[--color-accent-primary] mt-0.5"/>
+                    <div>
+                      <p className="font-medium text-[--text-primary]">Check expiration dates</p>
+                      <p className="text-sm">Expired documents will not be accepted.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <FileText className="h-4 w-4 text-[--color-accent-primary] mt-0.5"/>
+                    <div>
+                      <p className="font-medium text-[--text-primary]">Match your information</p>
+                      <p className="text-sm">Ensure the details you provide match your documents.</p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Accepted Documents */}
-              <Card>
+              <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_8px_22px_rgba(0,0,0,0.07)] backdrop-blur">
                 <CardHeader>
-                  <CardTitle>Accepted Documents</CardTitle>
+                  <CardTitle className="heading-anton">Need help?</CardTitle>
+                  <CardDescription className="text-[--text-secondary] body-share-tech">
+                    We&apos;re here to support your verification journey
+                  </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="font-medium text-sm mb-2">Government-Issued ID</h4>
-                      <ul className="text-xs text-muted-foreground space-y-1">
-                        {acceptedDocuments.id.map(doc => (
-                          <li key={doc}>• {doc}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-sm mb-2">Proof of Address</h4>
-                      <ul className="text-xs text-muted-foreground space-y-1">
-                        {acceptedDocuments.address.map(doc => (
-                          <li key={doc}>• {doc}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Security Notice */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Lock className="h-5 w-5 mr-2"/>
-                    Security & Privacy
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-sm text-muted-foreground space-y-2">
-                    <p>
-                      Your documents are encrypted and stored securely.
-                      We use bank-level encryption to protect your information.
-                    </p>
-                    <p>
-                      Documents are automatically deleted after verification is complete.
-                      We never share your information with third parties.
-                    </p>
-                  </div>
+                <CardContent className="space-y-3">
+                  <Alert>
+                    <AlertTitle>Support</AlertTitle>
+                    <AlertDescription>
+                      Contact our support team if you need assistance with verification.
+                    </AlertDescription>
+                  </Alert>
+                  <Button asChild variant="outline" className="w-full h-11 rounded-full border-[--border-default] bg-[--surface-default] text-[--text-primary]">
+                    <Link href="/support">Contact Support</Link>
+                  </Button>
                 </CardContent>
               </Card>
             </div>

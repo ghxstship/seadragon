@@ -1,8 +1,10 @@
 
 import { Metadata } from 'next'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import Link from "next/link"
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Header } from '@/lib/design-system'
 
 export const metadata: Metadata = {
   title: 'SSO Sign In | ATLVS + GVTEWAY',
@@ -11,89 +13,104 @@ export const metadata: Metadata = {
 
 export default function SSOLoginPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-md mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-neutral-900 mb-2">Enterprise Sign In</h1>
-          <p className="text-neutral-600">Sign in with your organization&apos;s SSO</p>
-        </div>
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
+      <Header/>
 
-        <div className="bg-background rounded-lg shadow-md p-6 mb-6">
-          <form className="space-y-6">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-2">
-                Work Email Address
-              </label>
-              <Input
-                type="email"
-                id="email"
-                className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-primary"
-                placeholder="name@company.com"
-                required/>
-              <p className="text-xs text-neutral-500 mt-1">
-                Enter your work email to find your SSO provider
-              </p>
-            </div>
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-md mx-auto space-y-6">
+          <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur animate-fade-in">
+            <CardHeader className="text-center space-y-2">
+              <CardTitle className="text-3xl leading-tight heading-anton">Enterprise Sign In</CardTitle>
+              <CardDescription className="text-[--text-secondary] body-share-tech">
+                Sign in with your organization&apos;s SSO
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-5">
+              <form className="space-y-4">
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-sm font-medium text-[--text-secondary] body-share-tech">
+                    Work Email Address
+                  </label>
+                  <Input
+                    type="email"
+                    id="email"
+                    placeholder="name@company.com"
+                    required
+                  />
+                  <p className="text-xs text-[--text-muted] body-share-tech">
+                    Enter your work email to find your SSO provider
+                  </p>
+                </div>
 
-            <Button
-              type="submit"
-              className="w-full bg-accent-secondary text-primary-foreground py-2 px-4 rounded-md hover:bg-accent-tertiary focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2"
-            >
-              Continue with SSO
-            </Button>
-          </form>
-        </div>
+                <Button
+                  type="submit"
+                  className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5"
+                >
+                  Continue with SSO
+                </Button>
+              </form>
 
-        <div className="bg-gray-50 rounded-lg p-4 mb-6">
-          <h3 className="text-sm font-medium text-neutral-900 mb-2">Popular SSO Providers</h3>
-          <div className="grid grid-cols-2 gap-2">
-            <Button className="p-2 border border-neutral-300 rounded hover:bg-neutral-100 text-sm">
-              Google Workspace
-            </Button>
-            <Button className="p-2 border border-neutral-300 rounded hover:bg-neutral-100 text-sm">
-              Microsoft Azure AD
-            </Button>
-            <Button className="p-2 border border-neutral-300 rounded hover:bg-neutral-100 text-sm">
-              Okta
-            </Button>
-            <Button className="p-2 border border-neutral-300 rounded hover:bg-neutral-100 text-sm">
-              OneLogin
-            </Button>
-          </div>
-        </div>
+              <div className="relative flex items-center justify-center">
+                <span className="absolute inset-x-0 h-px bg-[--border-default]" />
+                <span className="relative bg-[--surface-default] px-3 text-[11px] uppercase tracking-[0.18em] text-[--text-muted] body-share-tech">
+                  or
+                </span>
+              </div>
 
-        <div className="text-center space-y-4">
-          <div className="flex items-center">
-            <div className="flex-1 border-t border-neutral-300"></div>
-            <span className="px-4 text-sm text-neutral-500">or</span>
-            <div className="flex-1 border-t border-neutral-300"></div>
-          </div>
+              <div className="space-y-2">
+                <Link
+                  href="/auth/login/email"
+                  className="block w-full h-11 rounded-full border border-[--border-default] bg-white text-[--text-primary] shadow-[0_6px_18px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5 text-center leading-[44px]"
+                >
+                  Sign in with Email
+                </Link>
+                <Link
+                  href="/auth/login/magic-link"
+                  className="block w-full h-11 rounded-full border border-[--border-default] bg-white text-[--text-primary] shadow-[0_6px_18px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5 text-center leading-[44px]"
+                >
+                  Use Magic Link
+                </Link>
+              </div>
 
-          <div className="space-y-2">
-            <Link href="/auth/login/email" className="block w-full bg-background text-neutral-700 border border-neutral-300 py-2 px-4 rounded-md hover:bg-gray-50">
-              Sign in with Email
-            </Link>
-            <Link href="/auth/login/magic-link" className="block w-full bg-background text-neutral-700 border border-neutral-300 py-2 px-4 rounded-md hover:bg-gray-50">
-              Use Magic Link
-            </Link>
-          </div>
+              <div className="text-center text-sm text-[--text-secondary] space-y-1">
+                <p>
+                  Don&apos;t have an account?{' '}
+                  <Link href="/auth/signup" className="text-[--color-accent-primary] hover:underline">
+                    Sign up
+                  </Link>
+                </p>
+              </div>
+            </CardContent>
+          </Card>
 
-          <p className="text-sm text-neutral-600">
-            Don&apos;t have an account?{' '}
-            <Link href="/auth/signup" className="text-accent-secondary hover:text-blue-800">
-              Sign up
-            </Link>
-          </p>
-        </div>
+          <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_8px_22px_rgba(0,0,0,0.07)] backdrop-blur animate-fade-in">
+            <CardContent className="p-4 space-y-3">
+              <div>
+                <h3 className="text-sm font-medium text-[--text-primary] heading-anton">Popular SSO Providers</h3>
+                <div className="grid grid-cols-2 gap-2 mt-3">
+                  {['Google Workspace', 'Microsoft Azure AD', 'Okta', 'OneLogin'].map((provider) => (
+                    <Button
+                      key={provider}
+                      variant="outline"
+                      className="h-10 rounded-xl border border-[--border-default] bg-white text-[--text-primary] shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 transition text-sm"
+                    >
+                      {provider}
+                    </Button>
+                  ))}
+                </div>
+              </div>
 
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-          <h3 className="text-sm font-medium text-blue-900 mb-2">SSO Benefits</h3>
-          <ul className="text-sm text-blue-800 space-y-1">
-            <li>• Single sign-on across all platforms</li>
-            <li>• Enhanced security with enterprise controls</li>
-            <li>• Automatic account provisioning</li>
-            <li>• Centralized user management</li>
-          </ul>
+              <div className="pt-2 border-t border-[--border-default] space-y-2">
+                <h4 className="text-sm font-medium text-[--text-primary] heading-anton">SSO Benefits</h4>
+                <ul className="text-sm text-[--text-secondary] body-share-tech space-y-1 list-disc list-inside">
+                  <li>Single sign-on across all platforms</li>
+                  <li>Enhanced security with enterprise controls</li>
+                  <li>Automatic account provisioning</li>
+                  <li>Centralized user management</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

@@ -184,12 +184,12 @@ function PushNotificationHandler() {
 
   return (
     <div className="fixed top-4 right-4 z-50 max-w-sm">
-      <Card className="border-0 bg-[#1f2736] text-white shadow-[0_16px_50px_rgba(0,0,0,0.35)]">
+      <Card className="border border-[var(--border-default)] bg-[var(--surface-default)] text-[var(--text-primary)] shadow-[0_20px_60px_rgba(0,0,0,0.2)] rounded-[var(--radius-lg)]">
         <CardHeader className="pb-2">
           <div className="flex items-start justify-between">
             <div className="space-y-1">
-              <CardTitle className="text-lg font-black tracking-tight">Enable Notifications</CardTitle>
-              <CardDescription className="text-sm text-[#c7d2e6]">
+              <CardTitle className="text-lg font-black tracking-tight uppercase text-[var(--text-primary)]">Enable Notifications</CardTitle>
+              <CardDescription className="text-sm text-[var(--text-secondary)]">
                 Get notified about event updates, deadlines, and important announcements
               </CardDescription>
             </div>
@@ -197,7 +197,7 @@ function PushNotificationHandler() {
               type="button"
               onClick={handleDismissNotifications}
               aria-label="Close notification prompt"
-              className="flex h-8 w-8 items-center justify-center rounded-full text-[#c7d2e6] transition hover:bg-[#2f3a4f]/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#c7d2e6]/50 focus:ring-offset-2 focus:ring-offset-[#1f2736]"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--text-secondary)] transition hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-primary)]/40 focus:ring-offset-2 focus:ring-offset-[var(--surface-default)]"
             >
               <span aria-hidden className="text-xl leading-none">×</span>
             </button>
@@ -207,7 +207,7 @@ function PushNotificationHandler() {
           <div className="flex gap-2">
             <Button
               onClick={handleEnableNotifications}
-              className="flex-1 rounded-md bg-[#d53b38] text-white hover:bg-[#c23331]"
+              className="flex-1 rounded-full shadow"
               size="sm"
             >
               Enable
@@ -216,7 +216,7 @@ function PushNotificationHandler() {
               onClick={handleDismissNotifications}
               variant="outline"
               size="sm"
-              className="rounded-md border-[#334155] bg-[#e2e8f0] text-[#475569] hover:bg-[#cbd5e1]"
+              className="rounded-full border-[var(--border-default)] bg-[var(--surface-default)] text-[var(--text-primary)] hover:border-[var(--color-accent-primary)]"
             >
               Not Now
             </Button>

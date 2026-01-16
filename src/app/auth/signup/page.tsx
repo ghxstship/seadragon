@@ -127,16 +127,16 @@ export default function SignupPage() {
         <div className="max-w-md mx-auto">
           <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
             <CardHeader className="text-center space-y-2">
-              <CardTitle className="text-3xl leading-tight" style={{ fontFamily: 'Anton, var(--font-sans)' }}>Create Your Account</CardTitle>
-              <CardDescription className="text-[--text-secondary]" style={{ fontFamily: 'Share Tech, sans-serif' }}>
+              <CardTitle className="text-3xl leading-tight heading-anton">Create Your Account</CardTitle>
+              <CardDescription className="text-[--text-secondary] body-share-tech">
                 Join the ATLVS + GVTEWAY community
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Tabs defaultValue="consumer" className="w-full">
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="consumer">Join as Member</TabsTrigger>
-                  <TabsTrigger value="professional">Join as Professional</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-2 bg-[--surface-hover]">
+                  <TabsTrigger value="consumer" className="data-[state=active]:bg-[--surface-default] data-[state=active]:text-[--text-primary]">Join as Member</TabsTrigger>
+                  <TabsTrigger value="professional" className="data-[state=active]:bg-[--surface-default] data-[state=active]:text-[--text-primary]">Join as Professional</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="consumer" className="space-y-4">
@@ -144,7 +144,7 @@ export default function SignupPage() {
                     {/* Name Fields */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="firstName">First Name</Label>
+                        <Label htmlFor="firstName" className="text-[--text-secondary] body-share-tech">First Name</Label>
                         <Input
                           id="firstName"
                           type="text"
@@ -154,7 +154,7 @@ export default function SignupPage() {
                           required/>
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="lastName">Last Name</Label>
+                        <Label htmlFor="lastName" className="text-[--text-secondary] body-share-tech">Last Name</Label>
                         <Input
                           id="lastName"
                           type="text"
@@ -167,7 +167,7 @@ export default function SignupPage() {
 
                     {/* Email */}
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email" className="text-[--text-secondary] body-share-tech">Email</Label>
                       <Input
                         id="email"
                         type="email"
@@ -179,7 +179,7 @@ export default function SignupPage() {
 
                     {/* Password */}
                     <div className="space-y-2">
-                      <Label htmlFor="password">Password</Label>
+                      <Label htmlFor="password" className="text-[--text-secondary] body-share-tech">Password</Label>
                       <div className="relative">
                         <Input
                           id="password"
@@ -206,7 +206,7 @@ export default function SignupPage() {
 
                     {/* Confirm Password */}
                     <div className="space-y-2">
-                      <Label htmlFor="confirmPassword">Confirm Password</Label>
+                      <Label htmlFor="confirmPassword" className="text-sm text-[--text-secondary] font-medium">Confirm Password</Label>
                       <div className="relative">
                         <Input
                           id="confirmPassword"
@@ -214,7 +214,9 @@ export default function SignupPage() {
                           placeholder="••••••••"
                           value={formData.confirmPassword}
                           onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                          required/>
+                          required
+                          className="bg-[--surface-default] py-3 px-4 text-[--text-primary] placeholder:text-[--text-placeholder] focus:ring-[--color-accent-primary]"
+                        />
                         <Button
                           type="button"
                           variant="ghost"
@@ -223,9 +225,9 @@ export default function SignupPage() {
                           onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                         >
                           {showConfirmPassword ? (
-                            <EyeOff className="h-4 w-4"/>
+                            <EyeOff className="h-4 w-4 text-[--text-secondary]" />
                           ) : (
-                            <Eye className="h-4 w-4"/>
+                            <Eye className="h-4 w-4 text-[--text-secondary]" />
                           )}
                         </Button>
                       </div>
@@ -233,15 +235,19 @@ export default function SignupPage() {
 
                     {/* Error Message */}
                     {error && (
-                      <div className="flex items-center space-x-2 text-sm text-destructive bg-destructive/10 p-3 rounded">
-                        <AlertCircle className="h-4 w-4"/>
+                      <div className="flex items-center space-x-2 text-sm text-[--color-error] bg-[--color-error-light] p-3 rounded">
+                        <AlertCircle className="h-4 w-4 text-[--color-error]" />
                         <span>{error}</span>
                       </div>
                     )}
 
                     {/* Submit Button */}
-                    <Button type="submit" className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5" disabled={isLoading}>
-                      {isLoading ? 'Creating Account...' : 'Create Account'}
+                    <Button
+                      type="submit"
+                      className="w-full h-11 rounded-full bg-[--color-accent-primary] text-black shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? 'Creating account...' : 'Create Account'}
                     </Button>
                   </form>
                 </TabsContent>
@@ -250,71 +256,81 @@ export default function SignupPage() {
                   <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Organization Name */}
                     <div className="space-y-2">
-                      <Label htmlFor="organizationName">Organization Name</Label>
+                      <Label htmlFor="organizationName" className="text-sm text-[--text-secondary] font-medium">Organization Name</Label>
                       <Input
                         id="organizationName"
                         type="text"
                         placeholder="Your Company LLC"
                         value={formData.organizationName}
-                        onChange={(e) => handleInputChange('organizationName', e.target.value)}/>
-                      <p className="text-xs text-muted-foreground">
+                        onChange={(e) => handleInputChange('organizationName', e.target.value)}
+                        className="bg-[--surface-default] py-3 px-4 text-[--text-primary] placeholder:text-[--text-placeholder] focus:ring-[--color-accent-primary]"
+                      />
+                      <p className="text-xs text-[--text-muted]">
                         Leave blank if joining an existing organization
                       </p>
                     </div>
 
                     {/* Organization Slug */}
                     <div className="space-y-2">
-                      <Label htmlFor="organizationSlug">Organization Slug</Label>
+                      <Label htmlFor="organizationSlug" className="text-sm text-[--text-secondary] font-medium">Organization Slug</Label>
                       <Input
                         id="organizationSlug"
                         type="text"
                         placeholder="your-company"
                         value={formData.organizationSlug}
-                        onChange={(e) => handleInputChange('organizationSlug', e.target.value)}/>
-                      <p className="text-xs text-muted-foreground">
-                        Used for your organization&apos;s subdomain
+                        onChange={(e) => handleInputChange('organizationSlug', e.target.value)}
+                        className="bg-[--surface-default] py-3 px-4 text-[--text-primary] placeholder:text-[--text-placeholder] focus:ring-[--color-accent-primary]"
+                      />
+                      <p className="text-xs text-[--text-muted]">
+                        Used for your organization's subdomain
                       </p>
                     </div>
 
                     {/* Name Fields */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="firstName">First Name</Label>
+                        <Label htmlFor="firstName" className="text-sm text-[--text-secondary] font-medium">First Name</Label>
                         <Input
                           id="firstName"
                           type="text"
                           placeholder="John"
                           value={formData.firstName}
                           onChange={(e) => handleInputChange('firstName', e.target.value)}
-                          required/>
+                          required
+                          className="bg-[--surface-default] py-3 px-4 text-[--text-primary] placeholder:text-[--text-placeholder] focus:ring-[--color-accent-primary]"
+                        />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="lastName">Last Name</Label>
+                        <Label htmlFor="lastName" className="text-sm text-[--text-secondary] font-medium">Last Name</Label>
                         <Input
                           id="lastName"
                           type="text"
                           placeholder="Doe"
                           value={formData.lastName}
                           onChange={(e) => handleInputChange('lastName', e.target.value)}
-                          required/>
+                          required
+                          className="bg-[--surface-default] py-3 px-4 text-[--text-primary] placeholder:text-[--text-placeholder] focus:ring-[--color-accent-primary]"
+                        />
                       </div>
                     </div>
 
                     {/* Email */}
                     <div className="space-y-2">
-                      <Label htmlFor="email">Work Email</Label>
+                      <Label htmlFor="email" className="text-sm text-[--text-secondary] font-medium">Work Email</Label>
                       <Input
                         id="email"
                         type="email"
                         placeholder="john@company.com"
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
-                        required/>
+                        required
+                        className="bg-[--surface-default] py-3 px-4 text-[--text-primary] placeholder:text-[--text-placeholder] focus:ring-[--color-accent-primary]"
+                      />
                     </div>
 
                     {/* Password */}
                     <div className="space-y-2">
-                      <Label htmlFor="password">Password</Label>
+                      <Label htmlFor="password" className="text-sm text-[--text-secondary] font-medium">Password</Label>
                       <div className="relative">
                         <Input
                           id="password"
@@ -322,7 +338,9 @@ export default function SignupPage() {
                           placeholder="••••••••"
                           value={formData.password}
                           onChange={(e) => handleInputChange('password', e.target.value)}
-                          required/>
+                          required
+                          className="bg-[--surface-default] py-3 px-4 text-[--text-primary] placeholder:text-[--text-placeholder] focus:ring-[--color-accent-primary]"
+                        />
                         <Button
                           type="button"
                           variant="ghost"
@@ -331,9 +349,9 @@ export default function SignupPage() {
                           onClick={() => setShowPassword(!showPassword)}
                         >
                           {showPassword ? (
-                            <EyeOff className="h-4 w-4"/>
+                            <EyeOff className="h-4 w-4 text-[--text-secondary]" />
                           ) : (
-                            <Eye className="h-4 w-4"/>
+                            <Eye className="h-4 w-4 text-[--text-secondary]" />
                           )}
                         </Button>
                       </div>
@@ -341,7 +359,7 @@ export default function SignupPage() {
 
                     {/* Confirm Password */}
                     <div className="space-y-2">
-                      <Label htmlFor="confirmPassword">Confirm Password</Label>
+                      <Label htmlFor="confirmPassword" className="text-sm text-[--text-secondary] font-medium">Confirm Password</Label>
                       <div className="relative">
                         <Input
                           id="confirmPassword"
@@ -349,7 +367,9 @@ export default function SignupPage() {
                           placeholder="••••••••"
                           value={formData.confirmPassword}
                           onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                          required/>
+                          required
+                          className="bg-[--surface-default] py-3 px-4 text-[--text-primary] placeholder:text-[--text-placeholder] focus:ring-[--color-accent-primary]"
+                        />
                         <Button
                           type="button"
                           variant="ghost"
@@ -358,9 +378,9 @@ export default function SignupPage() {
                           onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                         >
                           {showConfirmPassword ? (
-                            <EyeOff className="h-4 w-4"/>
+                            <EyeOff className="h-4 w-4 text-[--text-secondary]" />
                           ) : (
-                            <Eye className="h-4 w-4"/>
+                            <Eye className="h-4 w-4 text-[--text-secondary]" />
                           )}
                         </Button>
                       </div>
@@ -368,15 +388,19 @@ export default function SignupPage() {
 
                     {/* Error Message */}
                     {error && (
-                      <div className="flex items-center space-x-2 text-sm text-destructive bg-destructive/10 p-3 rounded">
-                        <AlertCircle className="h-4 w-4"/>
+                      <div className="flex items-center space-x-2 text-sm text-[--color-error] bg-[--color-error-light] p-3 rounded">
+                        <AlertCircle className="h-4 w-4 text-[--color-error]" />
                         <span>{error}</span>
                       </div>
                     )}
 
                     {/* Submit Button */}
-                    <Button type="submit" className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5" disabled={isLoading}>
-                      {isLoading ? 'Creating Account...' : 'Create Professional Account'}
+                    <Button
+                      type="submit"
+                      className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? 'Creating Professional Account...' : 'Create Professional Account'}
                     </Button>
                   </form>
                 </TabsContent>
@@ -384,12 +408,12 @@ export default function SignupPage() {
 
               {/* Links */}
               <div className="text-center space-y-2 pt-4 border-t border-[--border-default]">
-                <div className="text-sm text-[--text-secondary]">
+                <p className="text-sm text-[--text-secondary]">
                   Already have an account?{' '}
                   <Link href="/auth/login" className="text-[--color-accent-primary] hover:underline">
                     Sign in
                   </Link>
-                </div>
+                </p>
                 <Link
                   href="/legal/terms"
                   className="text-xs text-[--text-muted] hover:underline"

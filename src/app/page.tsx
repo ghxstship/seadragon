@@ -40,7 +40,7 @@ function ContactSubscribeSection() {
   return (
     <section id="contact" className="mt-16 grid gap-6 rounded-[24px] border border-neutral-300 bg-white p-6 shadow-[0_12px_32px_rgba(0,0,0,0.06)] md:grid-cols-2">
       <div className="space-y-3">
-        <SectionHeader kicker="Contact" title="Talk with our team" description="Reach out and we'll respond quickly." />
+        <SectionHeader kicker="Contact" title="Let's Talk Live Entertainment" description="Our team responds within 24 hours—usually much faster." />
         <form onSubmit={handleContact} className="space-y-3">
           <input
             required
@@ -68,7 +68,7 @@ function ContactSubscribeSection() {
         </form>
       </div>
       <div className="space-y-3">
-        <SectionHeader kicker="Subscribe" title="Stay in the loop" description="Product updates and launch news." />
+        <SectionHeader kicker="Subscribe" title="Stay Ahead of the Industry" description="Platform updates, industry insights, and early access to new features." />
         <form onSubmit={handleSubscribe} className="space-y-3">
           <input
             required
@@ -90,9 +90,9 @@ function ContactSubscribeSection() {
 }
 
 const heroStats = [
-  { label: "Years experience", value: "13+" },
-  { label: "Attendees managed", value: "400K+" },
-  { label: "Budgets orchestrated", value: "$10M+" }
+  { label: "Years Powering Live Events", value: "13+" },
+  { label: "Attendees Per Event", value: "400K+" },
+  { label: "Production Budgets Managed", value: "$10M+" }
 ]
 
 const ecosystemCards: {
@@ -112,121 +112,121 @@ const ecosystemCards: {
 }[] = [
   {
     id: "compvss",
-    title: "Production Management",
-    desc: "Orchestrate end-to-end production from crew to show day with clear ownership and timelines.",
+    title: "ATLVS",
+    desc: "Manage every production element from crew scheduling to show day execution with real-time visibility, clear ownership, and automated timeline tracking.",
     icon: "Production",
     persona: "production",
     industry: "Media/Live",
     status: "Most Used",
     workflow: ["Build schedule", "Assign crews", "Track show-day checklists"],
-    planning: "Timeline, staffing, and vendor blocks aligned in one view",
-    execution: "Crew calls, logistics, and approvals in lockstep with show cues",
-    governance: "Scoped access for departments and vendors; auditable changes",
+    planning: "Production timelines, crew staffing, and vendor coordination unified in a single dashboard",
+    execution: "Automated crew calls, logistics coordination, and approval workflows synchronized with your run of show",
+    governance: "Role-based permissions for every department and vendor with complete audit trails",
     ctaPrimary: "View Workflows",
     ctaSecondary: "See Pricing Fit"
   },
   {
     id: "atlvs",
-    title: "Operations Hub",
-    desc: "Run your business, teams, and compliance from a single command center with audit-ready controls.",
+    title: "COMPVSS",
+    desc: "Centralize business operations, team management, and compliance tracking in one command center with enterprise-grade audit controls.",
     icon: "Operations",
     persona: "operations",
     industry: "Enterprise",
     status: "Live",
     workflow: ["Access policies", "Staff provisioning", "Performance review packets"],
-    planning: "Roles, scopes, and policies modeled across teams and partners",
-    execution: "Requests, assignments, and comms routed with guardrails",
-    governance: "Audit-ready records, approvals, and compliance views",
+    planning: "Flexible role hierarchies and access policies spanning internal teams and external partners",
+    execution: "Intelligent request routing, task assignment, and communications with built-in approval guardrails",
+    governance: "Real-time compliance dashboards, approval histories, and audit-ready documentation",
     ctaPrimary: "View Workflows",
     ctaSecondary: "See Pricing Fit"
   },
   {
     id: "gvteway",
-    title: "Consumer Experiences",
-    desc: "Launch branded portals and audience programs with governed access and measurable engagement.",
+    title: "GVTEWAY",
+    desc: "Deploy white-labeled audience portals, loyalty programs, and fan experiences with enterprise governance and engagement analytics.",
     icon: "Experience",
     persona: "experience",
     industry: "Audience",
     status: "Featured",
     workflow: ["Create portal", "Publish drops", "Measure engagement"],
-    planning: "Audience programs, drops, and loyalty mapped to journeys",
-    execution: "Publishing, access, and engagement cues in one lane",
-    governance: "Permissions, brand safety, and audit trails across surfaces",
+    planning: "Fan engagement programs, exclusive drops, and loyalty rewards mapped to attendee journeys",
+    execution: "Content publishing, access controls, and engagement triggers managed from a single workflow",
+    governance: "Brand safety controls, granular permissions, and complete audit trails across all touchpoints",
     ctaPrimary: "View Workflows",
     ctaSecondary: "See Pricing Fit"
   }
 ]
 
 const productTestimonials = [
-  { quote: "We cut show-day overruns in half while keeping every department on spec.", name: "Capt. Rowan Calder", title: "Master of Production" },
-  { quote: "Policies, staffing, and audits stay synced—my leads get clarity without chasing down updates.", name: "Capt. Liora Marlowe", title: "Harbormaster of Operations" },
-  { quote: "We launch audience programs with brand safety baked in—and track lift without extra tooling.", name: "Capt. Arjun Tidewell", title: "Commodore of Experience" }
+  { quote: "We cut show-day overruns by 50% while keeping every department aligned and on budget.", name: "Capt. Rowan Calder", title: "Master of Production" },
+  { quote: "Policies, staffing, and audits stay synchronized in real-time—my department leads get instant clarity without chasing updates.", name: "Capt. Liora Marlowe", title: "Harbormaster of Operations" },
+  { quote: "We launch audience engagement programs with brand safety built-in—and measure ROI without additional analytics tools.", name: "Capt. Arjun Tidewell", title: "Commodore of Experience" }
 ]
 
 const solutions = [
-  { title: "Production", desc: "End-to-end show management from pre-production to wrap", accent: accents.atlvs },
-  { title: "Installations", desc: "Immersive environment builds and technical deployments", accent: accents.compvss },
-  { title: "Activations", desc: "Brand experiences that create lasting impressions", accent: accents.gvteway },
-  { title: "Destinations", desc: "Venue and location operations at scale", accent: accents.atlvs },
-  { title: "Attractions", desc: "Theme parks, exhibits, and permanent installations", accent: accents.gvteway }
+  { title: "Live Productions", desc: "Complete show management from concept and pre-production through execution and wrap", accent: accents.atlvs },
+  { title: "Immersive Installations", desc: "Large-scale environment builds, scenic construction, and technical system deployments", accent: accents.compvss },
+  { title: "Brand Activations", desc: "Experiential marketing campaigns and branded experiences that drive measurable engagement", accent: accents.gvteway },
+  { title: "Entertainment Destinations", desc: "Multi-venue operations, hospitality integration, and location-based experience management", accent: accents.atlvs },
+  { title: "Attractions & Exhibits", desc: "Theme parks, museums, permanent installations, and touring exhibition management", accent: accents.gvteway }
 ]
 
 const features = [
   {
-    title: "End-to-End Live Operations Ecosystem",
-    desc: "Unified tooling from intake to wrap with governed access."
+    title: "End-to-End Live Operations Platform",
+    desc: "Unified production tooling from initial intake through event wrap with enterprise-grade access governance."
   },
   {
-    title: "Single Source of Truth Data Architecture",
-    desc: "Consolidated data model across teams, vendors, and venues."
+    title: "Single Source of Truth Architecture",
+    desc: "One consolidated data model connecting all teams, vendors, venues, and stakeholders in real-time."
   },
   {
-    title: "Enterprise-Grade Roles, Permissions & Governance",
-    desc: "Scoped roles, audits, and approvals built for high-stakes ops."
+    title: "Enterprise-Grade Permissions & Governance",
+    desc: "Granular role-based access, comprehensive audits, and approval workflows built for high-stakes live events."
   },
   {
-    title: "Unlimited Users with Controlled Access",
-    desc: "Scale collaborators without losing control of what they see and do."
+    title: "Unlimited Users, Total Access Control",
+    desc: "Scale your production team and vendor network without compromising security or visibility controls."
   },
   {
-    title: "Purpose-Built Live Entertainment Workflows",
-    desc: "Run-of-show, logistics, and field workflows designed by operators."
+    title: "Purpose-Built Entertainment Workflows",
+    desc: "Run-of-show timelines, logistics coordination, and field operations workflows designed by industry operators."
   },
   {
-    title: "Native Integrations + OpenAPI",
-    desc: "Calendar, storage, comms, and extensibility via OpenAPI."
+    title: "Native Integrations + Open API",
+    desc: "Seamless calendar, storage, and communication integrations plus full API access for custom development."
   },
   {
-    title: "Advanced Dashboards, Views & Reporting",
-    desc: "Operational telemetry across projects, crews, and guests."
+    title: "Advanced Dashboards & Real-Time Reporting",
+    desc: "Comprehensive operational analytics spanning projects, crew performance, and audience engagement."
   },
   {
-    title: "AI-Powered Interface, Automation & Insights",
-    desc: "Guardrailed AI suggestions for schedules, staffing, and logistics."
+    title: "AI-Powered Automation & Intelligent Insights",
+    desc: "Smart scheduling suggestions, staffing optimization, and logistics recommendations with human oversight guardrails."
   },
   {
-    title: "Multi-Organization Ecosystem Collaboration",
-    desc: "Vendors, agencies, venues, and brands aligned in one workspace."
+    title: "Multi-Organization Collaboration Hub",
+    desc: "Production companies, vendors, agencies, venues, and brands working together in one secure workspace."
   },
   {
-    title: "Live Intelligence with Offline Syncing",
-    desc: "Stay online even when connectivity drops on-site."
+    title: "Offline-First Mobile Operations",
+    desc: "Full functionality even when venue connectivity fails—automatic sync when you're back online."
   },
   {
-    title: "Public-Facing Branded Profiles & Portals",
-    desc: "Share live states and experiences via GVTEWAY surfaces."
+    title: "White-Labeled Public Portals",
+    desc: "Deploy branded audience-facing experiences and live event dashboards through GVTEWAY."
   },
   {
-    title: "Full White-Label Branding (Enterprise)",
-    desc: "Custom logos, colors, and domains across auth and dashboards."
+    title: "Complete White-Label Customization",
+    desc: "Your brand identity across every touchpoint—custom logos, colors, domains, and branded authentication flows."
   },
   {
-    title: "Live Intelligence for Physical Experiences",
-    desc: "Fuse physical signals into operational decisioning."
+    title: "Real-Time Operational Intelligence",
+    desc: "Transform on-site signals and sensor data into actionable operational decisions."
   },
   {
-    title: "Designed by Operators, for Operators",
-    desc: "Built with field-tested playbooks from real productions."
+    title: "Built by Operators, for Operators",
+    desc: "Every feature developed from field-tested playbooks and real production experience."
   }
 ]
 
@@ -235,10 +235,10 @@ const pricingPlans = [
     id: "core",
     name: "Core",
     price: "$0",
-    cadence: "Forever Free",
+    cadence: "Free Forever",
     tagline: "Work Here",
     audience: ["Crew", "Artists", "Vendors", "Interns", "Guests", "Volunteers"],
-    includes: ["Workforce + collaborator access layer", "Read-only + scoped task actions"],
+    includes: ["Full workforce and collaborator access layer", "Read access plus scoped task completion"],
     limits: ["Cannot create projects", "Cannot manage users", "No integrations", "No automation", "No AI"],
     cta: "Get Started Free",
     accent: accents.atlvs
@@ -249,13 +249,13 @@ const pricingPlans = [
     price: "$79",
     cadence: "Per User / Month",
     tagline: "Lead Here",
-    audience: ["Production managers", "Tour managers", "Department leads", "Vendors running sub-teams", "Embedded freelancers"],
+    audience: ["Production managers", "Artist managers", "Department leads", "Vendors running sub-teams", "Embedded freelancers"],
     includes: [
-      "Full write access within assigned scopes",
-      "Manage Core users within scope",
-      "Limited integrations (calendar, storage)",
-      "Limited AI Agent (usage-capped)",
-      "Advanced reporting for assigned scopes"
+      "Complete write access within your assigned project scopes",
+      "Direct management of Core users within your scope",
+      "Essential integrations including calendar and cloud storage",
+      "AI Agent access with monthly usage allocation",
+      "Advanced analytics and reporting for your assigned scopes"
     ],
     limits: ["Cannot create projects", "Cannot change global settings", "No billing/domain/API", "AI + automation caps"],
     cta: "Start Pro Trial",
@@ -265,22 +265,22 @@ const pricingPlans = [
     id: "enterprise",
     name: "Enterprise",
     price: "$1,499",
-    cadence: "Starting Monthly Base",
+    cadence: "Starting Monthly",
     tagline: "Create Here",
     audience: ["Production companies", "Festivals", "Venues", "Brands", "Agencies", "Promoters", "Municipalities"],
     includes: [
-      "Project creation (exclusive)",
-      "Unlimited internal users (domain-verified)",
-      "Unlimited external Core + Pro collaborators",
-      "Full integrations suite",
-      "Full AI Agent access",
-      "OpenAPI access",
-      "Full white-label branding",
-      "GVTEWAY public-facing tools",
-      "Global permissions, data, governance",
-      "Up to 10 active projects",
-      "Custom Automations",
-      "Priority Support"
+      "Exclusive project creation and ownership rights",
+      "Unlimited domain-verified internal team members",
+      "Unlimited external Core and Pro collaborator invites",
+      "Complete integrations suite with premium connectors",
+      "Unlimited AI Agent access and automation",
+      "Full OpenAPI access for custom development",
+      "Complete white-label branding and custom domains",
+      "GVTEWAY audience-facing portal suite",
+      "Enterprise-grade permissions, data governance, and compliance",
+      "Up to 10 concurrent active projects",
+      "Custom workflow automations",
+      "Priority support with dedicated success manager"
     ],
     limits: ["Up to 10 active projects", "AI agent allowance", "Automation runs", "API rate limits", "Priority support"],
     cta: "Contact Sales",
@@ -318,12 +318,30 @@ const ecosystemNav = [
 ]
 
 const faqs = [
-  { q: "What's the difference between ATLVS, COMPVSS, and GVTEWAY?", a: "ATLVS is the internal operations hub, COMPVSS handles production management, and GVTEWAY powers public-facing experiences." },
-  { q: "Can I start with Core and upgrade later?", a: "Yes. Core users can be upgraded to Pro or invited into Enterprise projects at any time." },
-  { q: "How does the AI Agent work?", a: "AI-powered interface provides automation suggestions, insights, and workflow optimization based on your production data." },
-  { q: "Is there a mobile app?", a: "Yes, with offline syncing for on-site operations where connectivity is limited." },
-  { q: "What integrations are available?", a: "Native calendar, storage, comms, plus OpenAPI for custom integrations (Enterprise)." },
-  { q: "How does white-labeling work?", a: "Enterprise customers can fully rebrand auth screens, dashboards, and team interfaces with custom logos, colors, and domains." }
+  {
+    q: "What's the difference between ATLVS, COMPVSS, and GVTEWAY?",
+    a: "ATLVS serves as your internal business operations command center, COMPVSS manages all production and show-day workflows, and GVTEWAY powers your public-facing audience experiences and branded portals."
+  },
+  {
+    q: "Can I start with Core and upgrade later?",
+    a: "Absolutely. Core users can upgrade to Pro or be invited into Enterprise projects at any time—your data and history transfer seamlessly."
+  },
+  {
+    q: "How does the AI Agent work?",
+    a: "The AI Agent analyzes your production data to provide intelligent automation suggestions, operational insights, and workflow optimizations—always with human-in-the-loop approval for critical decisions."
+  },
+  {
+    q: "Is there a mobile app?",
+    a: "Yes, native iOS and Android apps with full offline functionality—your crew stays productive even when venue WiFi fails, with automatic sync when connectivity returns."
+  },
+  {
+    q: "What integrations are available?",
+    a: "Native integrations with Google Calendar, Microsoft 365, Slack, Dropbox, Google Drive, and major cloud storage providers. Enterprise plans include OpenAPI access for building custom integrations with your existing tech stack."
+  },
+  {
+    q: "How does white-labeling work?",
+    a: "Enterprise customers get complete brand customization—your logo, colors, and custom domain across authentication screens, dashboards, team portals, and audience-facing experiences. Your clients never see the ATLVS brand."
+  }
 ]
 
 export default function Home() {
@@ -387,11 +405,11 @@ function NavBar({ openCalendly }: { openCalendly: () => void }) {
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-3">
-          <Button className="hidden h-10 rounded-full bg-black px-5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition hover:-translate-y-0.5 md:inline-flex" onClick={openCalendly}>
+          <Button className="h-10 rounded-full bg-black px-5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.12)]" onClick={openCalendly}>
             Request Demo
           </Button>
           <Button
-            className="hidden h-10 rounded-full border border-neutral-300 bg-[#f5f5f5] px-5 text-sm font-semibold text-neutral-900 shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5 md:inline-flex"
+            className="h-10 rounded-full border border-neutral-300 bg-[#f5f5f5] px-5 text-sm font-semibold text-neutral-900 shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5"
             onClick={handleSignIn}
           >
             Sign in
@@ -427,11 +445,18 @@ function NavBar({ openCalendly }: { openCalendly: () => void }) {
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <Button className="h-10 w-full rounded-full bg-black px-5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.12)]" onClick={openCalendly}>
+              <Button
+                size="lg"
+                className="h-11 w-full rounded-full bg-black px-6 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.12)] focus:outline-none"
+                onClick={openCalendly}
+              >
                 Request Demo
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <Button
-                className="h-10 w-full rounded-full border border-neutral-300 bg-[#f5f5f5] px-5 text-sm font-semibold text-neutral-900 shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5"
+                size="lg"
+                variant="outline"
+                className="h-11 w-full rounded-full border border-neutral-300 bg-[#f5f5f5] px-6 text-sm font-semibold text-neutral-900 shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5 focus:outline-none"
                 onClick={handleSignIn}
               >
                 Sign in
@@ -470,13 +495,13 @@ function HeroSection({ onRequestDemo, onExplore }: { onRequestDemo: () => void; 
         <div className="space-y-6">
           <div className="inline-flex items-center gap-2 rounded-full bg-neutral-100 px-4 py-2 text-xs uppercase tracking-[0.18em] text-neutral-800" style={{ fontFamily: "Share Tech Mono, monospace" }}>
             <Sparkles className="h-4 w-4" />
-            Live Intelligence for Physical Experiences
+            The #1 Live Entertainment Operations Platform
           </div>
           <h1 className="text-5xl leading-tight sm:text-6xl lg:text-7xl capitalize" style={{ fontFamily: "Anton, var(--font-sans)" }}>
             Orchestrate. Communicate. Dominate.
           </h1>
           <p className="text-base text-[#4a4a4a] sm:text-lg" style={{ fontFamily: "Share Tech, sans-serif" }}>
-            The end-to-end ecosystem powering live entertainment operations—from intimate theater productions to 400K+ attendee festivals and $10M+ budgets.
+            The complete event production management platform trusted by production companies, festivals, and experiential agencies to deliver flawless live experiences—from 50-person theater productions to 400,000+ attendee festivals and $10M+ budgets.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button
@@ -507,8 +532,18 @@ function HeroSection({ onRequestDemo, onExplore }: { onRequestDemo: () => void; 
         <div className="relative">
           <div className="overflow-hidden rounded-[22px] border border-neutral-300 bg-[#f5f5f5] shadow-[0_10px_30px_rgba(0,0,0,0.12)]">
             <div className="flex items-center justify-between border-b border-neutral-200 px-4 py-3 text-xs uppercase tracking-[0.16em] text-neutral-700" style={{ fontFamily: "Share Tech Mono, monospace" }}>
-              <span>ATLVS Dashboard</span>
-              <span className="text-[--accent-atlvs]" style={{ "--accent-atlvs": accents.atlvs } as CSSProperties}>
+              <div className="flex items-center gap-2 text-[11px]">
+                <span className="text-neutral-600">Demo</span>
+                <span className="text-neutral-400">/</span>
+                <span className="text-neutral-700">ATLVS</span>
+                <span className="text-neutral-400">/</span>
+                <span className="text-neutral-900">Dashboard</span>
+              </div>
+              <span
+                className="inline-flex items-center gap-1 rounded-full bg-[#eaf6d9] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[--accent-atlvs] shadow-[0_4px_10px_rgba(0,0,0,0.06)]"
+                style={{ "--accent-atlvs": accents.atlvs } as CSSProperties}
+              >
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: accents.atlvs }} />
                 Online
               </span>
             </div>
@@ -606,48 +641,40 @@ function ProductsSection() {
   return (
     <section id="products" className="mt-16 space-y-8">
       <SectionHeader
-        kicker="Products"
-        title="Three Platforms. One Suite."
-        description="A shared data, permissions, and orchestration fabric built for Production, Operations, and Experience teams."
+        kicker="Platform Suite"
+        title="Three Platforms. One Unified Ecosystem."
+        description="A unified data architecture connecting production management, operations control, and audience engagement—purpose-built for live entertainment professionals who refuse to compromise."
       />
 
       <div className="grid gap-6 lg:grid-cols-3">
         {filteredCards.map(card => (
           <article
             key={card.id}
-            className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-5 shadow-[0_14px_40px_rgba(0,0,0,0.12)] transition hover:-translate-y-1 hover:shadow-[0_18px_48px_rgba(0,0,0,0.16)]"
+            className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white p-5 shadow-[0_14px_40px_rgba(0,0,0,0.12)] transition hover:-translate-y-1 hover:shadow-[0,18px,48px_rgba(0,0,0,0.16)]"
             style={{ fontFamily: "Share Tech, sans-serif" }}
           >
-            <div className="flex items-center justify-between text-xs uppercase tracking-[0.16em] text-neutral-800" style={{ fontFamily: "Share Tech Mono, monospace" }}>
-              <div className="flex items-center gap-2">
-                <Square className="h-3 w-3" style={{ color: accents[card.id], fill: accents[card.id] }} />
-                {card.icon}
+            <div className="flex items-center gap-3 text-xs uppercase tracking-[0.16em] text-neutral-800" style={{ fontFamily: "Share Tech Mono, monospace" }}>
+              <Square className="h-3 w-3" style={{ color: accents[card.id], fill: accents[card.id] }} />
+              {card.icon}
+            </div>
+            <div className="mt-3 flex-1 space-y-3">
+              <h3 className="text-2xl capitalize" style={{ fontFamily: "Anton, var(--font-sans)" }}>
+                {card.title}
+              </h3>
+              <p className="text-sm text-[#4a4a4a]">{card.desc}</p>
+              <div className="flex min-h-[210px] flex-col gap-2 rounded-xl border border-neutral-200 bg-[#f7f7f7] p-3 text-sm text-neutral-900">
+                <p className="text-[11px] uppercase tracking-[0.16em] text-neutral-700" style={{ fontFamily: "Share Tech Mono, monospace" }}>
+                  Advantages of {card.title}
+                </p>
+                <ul className="space-y-1" style={{ fontFamily: "Share Tech, sans-serif" }}>
+                  {[card.planning, card.execution, card.governance].map(point => (
+                    <li key={point} className="flex items-start gap-2 leading-relaxed">
+                      <span className="mt-1 h-2 w-2 rounded-full" style={{ background: accents[card.id] }} />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <span className="rounded-full bg-neutral-100 px-2 py-1 text-[10px] font-semibold text-neutral-700">{card.status}</span>
-            </div>
-            <h3 className="mt-3 text-2xl capitalize" style={{ fontFamily: "Anton, var(--font-sans)" }}>
-              {card.title}
-            </h3>
-            <p className="mt-2 text-sm text-[#4a4a4a]">{card.desc}</p>
-
-            <div className="mt-4 flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.14em] text-neutral-700" style={{ fontFamily: "Share Tech Mono, monospace" }}>
-              <span className="rounded-full border border-neutral-300 bg-neutral-100 px-3 py-2 text-[11px] font-semibold">
-                Advantages
-              </span>
-            </div>
-
-            <div className="mt-4 space-y-2 rounded-xl border border-neutral-200 bg-[#f7f7f7] p-3 text-sm text-neutral-900">
-              <p className="text-[11px] uppercase tracking-[0.16em] text-neutral-700" style={{ fontFamily: "Share Tech Mono, monospace" }}>
-                Advantages of {card.title}
-              </p>
-              <ul className="space-y-1" style={{ fontFamily: "Share Tech, sans-serif" }}>
-                {[card.planning, card.execution, card.governance].map(point => (
-                  <li key={point} className="flex items-start gap-2 leading-relaxed">
-                    <span className="mt-1 h-2 w-2 rounded-full" style={{ background: accents[card.id] }} />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
               <Button className="rounded-full bg-black px-4 text-xs font-semibold text-white shadow" size="sm">
@@ -691,7 +718,7 @@ function SolutionsSection() {
 
   return (
     <section id="solutions" className="mt-16 space-y-6">
-      <SectionHeader kicker="Solutions" title="Built for Every Live Experience" />
+      <SectionHeader kicker="Industry Solutions" title="Purpose-Built for Every Live Entertainment Format" />
       <div className="relative overflow-hidden rounded-[20px] border border-neutral-300 bg-white p-4 shadow-[0_12px_40px_rgba(0,0,0,0.04)]">
         <div className="flex gap-3 overflow-x-auto pb-2" ref={scrollRef}>
           {solutions.map(solution => (
@@ -741,7 +768,7 @@ function SolutionsSection() {
 function FeaturesSection() {
   return (
     <section id="features" className="mt-16 space-y-6">
-      <SectionHeader kicker="Features" title="Why Operators Choose ATLVS" description="Designed by operators, for operators." />
+      <SectionHeader kicker="Features" title="Why Leading Operators Choose ATLVS" description="Built by live entertainment veterans with 13+ years of field-tested operations expertise." />
       <div className="grid gap-4 md:grid-cols-2">
         {features.map((feature, idx) => (
           <article
@@ -768,7 +795,7 @@ function FeaturesSection() {
 function PricingSection({ onRequestDemo }: { onRequestDemo?: () => void }) {
   return (
     <section id="pricing" className="mt-16 space-y-8">
-      <SectionHeader kicker="Pricing" title="Transparent. Flexible. Scalable." description="From crew members to global production companies." />
+      <SectionHeader kicker="Pricing" title="Transparent Pricing. Unlimited Scale." description="Plans designed for every role—from individual crew members to global production enterprises." />
       <div className="grid gap-6 lg:grid-cols-3">
         {pricingPlans.map(plan => (
           <article key={plan.id} className="flex h-full flex-col justify-between rounded-2xl border border-neutral-300 bg-white p-5 shadow-[0_12px_32px_rgba(0,0,0,0.08)]">
@@ -788,13 +815,18 @@ function PricingSection({ onRequestDemo }: { onRequestDemo?: () => void }) {
               </p>
               <div className="space-y-2 text-sm text-neutral-900" style={{ fontFamily: "Share Tech, sans-serif" }}>
                 <p className="font-semibold">Who it’s for:</p>
-                <ul className="list-disc space-y-1 pl-5 text-[#4a4a4a]">
+                <div className="flex flex-wrap gap-2 text-[#4a4a4a]">
                   {plan.audience.map(persona => (
-                    <li key={persona}>{persona}</li>
+                    <span
+                      key={persona}
+                      className="rounded-full border border-neutral-200 bg-[#f5f5f5] px-3 py-1 text-xs font-semibold"
+                    >
+                      {persona}
+                    </span>
                   ))}
-                </ul>
+                </div>
               </div>
-              <div className="space-y-2 text-sm text-neutral-900" style={{ fontFamily: "Share Tech, sans-serif" }}>
+              <div className="flex min-h-[220px] flex-col space-y-2 text-sm text-neutral-900" style={{ fontFamily: "Share Tech, sans-serif" }}>
                 <p className="font-semibold">Includes:</p>
                 <ul className="list-disc space-y-1 pl-5 text-[#4a4a4a]">
                   {plan.includes.map(item => (
@@ -857,7 +889,7 @@ function SocialProofSection() {
 
   return (
     <section id="trust" className="mt-16 space-y-6">
-      <SectionHeader kicker="Trust" title="Tested Across the Industry" />
+      <SectionHeader kicker="Trust" title="Trusted by Industry Leaders" />
       <div className="rounded-[18px] border border-neutral-300 bg-white p-5 shadow-[0_10px_30px_rgba(0,0,0,0.12)]">
         <div
           className="flex gap-4 overflow-x-hidden text-sm text-neutral-800"
@@ -890,7 +922,7 @@ function SocialProofSection() {
 function FAQSection() {
   return (
     <section id="faq" className="mt-16 rounded-[24px] border border-neutral-300 bg-white p-6 shadow-[0_14px_44px_rgba(0,0,0,0.05)]">
-      <SectionHeader kicker="FAQ" title="Frequently Asked Questions" description="No worries, here you can find all the answers." />
+      <SectionHeader kicker="FAQ" title="Frequently Asked Questions" description="Everything you need to know about the ATLVS platform." />
       <Accordion type="single" collapsible className="mt-6 divide-y divide-neutral-200">
         {faqs.map(({ q, a }, idx) => (
           <AccordionItem key={q} value={`faq-${idx}`} className="border-none">
@@ -918,10 +950,10 @@ function CTASection({ onRequestDemo, onGetStarted }: { onRequestDemo?: () => voi
       <div className="grid gap-8">
         <div className="space-y-4">
           <h3 className="text-4xl sm:text-5xl capitalize" style={{ fontFamily: "Anton, var(--font-sans)" }}>
-            Ready to chart a new path?
+            Ready to Transform Your Operations?
           </h3>
           <p className="text-sm" style={{ fontFamily: "Share Tech, sans-serif" }}>
-            Whether you’re running a 50-person crew or a 400,000-attendee festival, ATLVS scales with you.
+            From boutique productions to 400,000-attendee festivals, ATLVS delivers the operational clarity your team needs to execute flawlessly.
           </p>
           <div className="flex flex-wrap gap-3">
             <Button size="lg" className="h-11 rounded-full bg-black px-6 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition hover:-translate-y-0.5" onClick={onRequestDemo}>
@@ -939,42 +971,127 @@ function CTASection({ onRequestDemo, onGetStarted }: { onRequestDemo?: () => voi
 }
 
 function FooterSection() {
+  const footerColumns = [
+    {
+      title: "Product",
+      links: [
+        { label: "Search (PeopleGPT)", href: "#products" },
+        { label: "Outreach", href: "#products" },
+        { label: "Juicebox Agent", href: "#products" },
+        { label: "Chrome Extension", href: "#products" }
+      ]
+    },
+    {
+      title: "Resources",
+      links: [
+        { label: "Docs", href: "/docs" },
+        { label: "Pricing", href: "#pricing" },
+        { label: "Referral", href: "#" },
+        { label: "Partners", href: "#" },
+        { label: "Search Library", href: "#" },
+        { label: "Help Center", href: "#" },
+        { label: "Customers", href: "#" }
+      ]
+    },
+    {
+      title: "Company",
+      links: [
+        { label: "Blog", href: "#" },
+        { label: "Careers", href: "#" },
+        { label: "LinkedIn", href: "https://www.linkedin.com" },
+        { label: "X / Twitter", href: "https://twitter.com" }
+      ]
+    },
+    {
+      title: "Security",
+      links: [
+        { label: "Status", href: "/status" },
+        { label: "Trust Center", href: "#" },
+        { label: "AI Audit Center", href: "#" },
+        { label: "Privacy Choices", href: "#" },
+        { label: "Responsible Disclosure", href: "#" }
+      ]
+    }
+  ]
+
+  const openCTA = () => {
+    window.open("https://calendly.com/ghxstship/sync", "_blank", "noopener,noreferrer")
+  }
+
   return (
-    <footer className="mt-16 border-t border-neutral-300 bg-white py-12">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-          <div className="space-y-3" style={{ fontFamily: "Share Tech, sans-serif" }}>
-            <div className="text-lg font-semibold text-neutral-900">ATLVS Suite</div>
-            <p className="text-sm text-[#4a4a4a]">Live ops, governance, and experience delivery for production, operations, and audience teams.</p>
+    <footer
+      className="mt-16 text-[#e8e8f0]"
+      style={{
+        background: "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08), transparent 35%), radial-gradient(circle at 80% 10%, rgba(255,255,255,0.06), transparent 30%), linear-gradient(135deg, #150d26 0%, #0d081a 55%, #0a0716 100%)"
+      }}
+    >
+      <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-14">
+        <div className="space-y-2" style={{ fontFamily: "Share Tech, sans-serif" }}>
+          <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#b6b0d0]" style={{ fontFamily: "Share Tech Mono, monospace" }}>
+            ATLVS Suite
           </div>
-          <div className="space-y-3" style={{ fontFamily: "Share Tech, sans-serif" }}>
-            <div className="text-xs uppercase tracking-[0.14em] text-neutral-600" style={{ fontFamily: "Share Tech Mono, monospace" }}>Contact</div>
-            <a className="block text-sm text-neutral-800 hover:text-[var(--text-primary)]" href="mailto:hello@atlvs.one">hello@atlvs.one</a>
-            <a className="block text-sm text-neutral-800 hover:text-[var(--text-primary)]" href="tel:+18885551234">+1 (888) 555-1234</a>
-            <div className="flex items-center gap-3 text-sm text-neutral-800">
-              <a className="flex h-9 w-9 items-center justify-center rounded-full border border-neutral-300 bg-[#f5f5f5] text-neutral-800 hover:text-[var(--text-primary)]" href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                in
+          <p className="max-w-2xl text-sm text-[#d5d0ea]">
+            The live entertainment operations platform powering production, operations, and audience experience teams worldwide.
+          </p>
+        </div>
+        <div className="grid gap-10 md:grid-cols-5" style={{ fontFamily: "Share Tech, sans-serif" }}>
+          {footerColumns.map((col) => (
+            <div key={col.title} className="space-y-4">
+              <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#b6b0d0]" style={{ fontFamily: "Share Tech Mono, monospace" }}>
+                {col.title}
+              </div>
+              <ul className="space-y-3 text-sm">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="transition-colors duration-150 hover:text-[var(--color-accent-primary)]"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          <div className="space-y-4">
+            <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#b6b0d0]" style={{ fontFamily: "Share Tech Mono, monospace" }}>
+              ATLVS in action
+            </div>
+            <div className="space-y-3 text-sm">
+              <a href="/trial" className="block transition-colors duration-150 hover:text-[var(--color-accent-primary)]">
+                Free Trial
               </a>
-              <a className="flex h-9 w-9 items-center justify-center rounded-full border border-neutral-300 bg-[#f5f5f5] text-neutral-800 hover:text-[var(--text-primary)]" href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
-                IG
+              <a href="/signin" className="block transition-colors duration-150 hover:text-[var(--color-accent-primary)]">
+                Sign In
               </a>
-              <a className="flex h-9 w-9 items-center justify-center rounded-full border border-neutral-300 bg-[#f5f5f5] text-neutral-800 hover:text-[var(--text-primary)]" href="https://www.tiktok.com" target="_blank" rel="noreferrer" aria-label="TikTok">
-                TT
-              </a>
-              <a className="flex h-9 w-9 items-center justify-center rounded-full border border-neutral-300 bg-[#f5f5f5] text-neutral-800 hover:text-[var(--text-primary)]" href="https://bsky.app" target="_blank" rel="noreferrer" aria-label="Bluesky">
-                Bsky
-              </a>
+              <div className="flex items-center gap-3 pt-3">
+                <Button
+                  size="sm"
+                  className="h-11 rounded-full bg-[var(--color-accent-primary)] px-5 text-sm font-semibold text-black shadow-[0_12px_24px_rgba(0,0,0,0.24)] transition hover:-translate-y-0.5"
+                  onClick={openCTA}
+                >
+                  Create Your ATLVS
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="flex flex-col gap-3 border-t border-neutral-200 pt-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="text-sm text-[#4a4a4a]" style={{ fontFamily: "Share Tech Mono, monospace" }}>
-            © 2026 G H X S T S H I P Industries LLC
-          </div>
-          <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-700" style={{ fontFamily: "Share Tech, sans-serif" }}>
-            <a className="hover:text-[var(--text-primary)]" href="/privacy">Privacy Policy</a>
-            <a className="hover:text-[var(--text-primary)]" href="/terms">Terms of Service</a>
+      <div className="w-full border-t border-white/10">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-6 text-sm text-[#c8c3dd] md:flex-row md:items-center md:justify-between" style={{ fontFamily: "Share Tech, sans-serif" }}>
+          <div className="flex w-full flex-wrap items-center justify-between gap-x-6 gap-y-3">
+            <span style={{ fontFamily: "Share Tech Mono, monospace" }}>© 2026 Juicebox</span>
+            <a className="hover:text-[var(--color-accent-primary)]" href="/privacy">Privacy policy</a>
+            <a className="hover:text-[var(--color-accent-primary)]" href="/terms">Terms of Service</a>
+            <a className="hover:text-[var(--color-accent-primary)]" href="/cookies">Cookie Policy</a>
+            <a className="hover:text-[var(--color-accent-primary)]" href="/choices">Cookie Choices</a>
+            <a className="hover:text-[var(--color-accent-primary)]" href="/gdpr">GDPR &amp; CCPA</a>
+            <a className="hover:text-[var(--color-accent-primary)]" href="/donotsell">Do Not Sell My Info</a>
+            <a className="hover:text-[var(--color-accent-primary)]" href="/status">Status</a>
           </div>
         </div>
       </div>

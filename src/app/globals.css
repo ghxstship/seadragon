@@ -52,8 +52,6 @@
   --border: var(--border-default);
   --input: var(--border-default);
   --ring: var(--color-accent-primary);
-  --background: var(--bg-primary);
-  --foreground: var(--text-primary);
 
   /* -------------------------------------------------------------------------
      Surface Colors
@@ -143,11 +141,15 @@
   --focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.5);
   --focus-ring-offset: 2px;
 
-  /* Legacy compatibility */
-  --background: var(--bg-primary);
-  --foreground: var(--text-primary);
-  --color-background: var(--bg-primary);
-  --color-foreground: var(--text-primary);
+  /* Radius Scale */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --radius-card: var(--radius-md);
+  --radius-surface: var(--radius-lg);
+  --radius-button: var(--radius-pill);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -268,8 +270,6 @@ h6 {
   --border: var(--border-default);
   --input: var(--border-default);
   --ring: var(--color-accent-primary);
-  --background: var(--bg-primary);
-  --foreground: var(--text-primary);
 
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
@@ -296,9 +296,6 @@ h6 {
   --color-warning-light: rgba(245, 158, 11, 0.15);
   --color-error-light: rgba(239, 68, 68, 0.15);
   --color-info-light: rgba(6, 182, 212, 0.15);
-
-  --background: var(--bg-primary);
-  --foreground: var(--text-primary);
 }
 
 /* ============================================================================
@@ -328,8 +325,6 @@ h6 {
   --border: var(--border-default);
   --input: var(--border-default);
   --ring: var(--color-accent-primary);
-  --background: var(--bg-primary);
-  --foreground: var(--text-primary);
 
   --text-primary: #e2e8f0;
   --text-secondary: #a8b3c4;
@@ -352,9 +347,6 @@ h6 {
   --glass-bg: rgba(35, 41, 56, 0.8);
   --glass-border: 1px solid rgba(255, 255, 255, 0.05);
   --glass-shadow: 0 0 24px rgba(99, 102, 241, 0.15);
-
-  --background: var(--bg-primary);
-  --foreground: var(--text-primary);
 }
 
 /* ============================================================================
@@ -368,8 +360,6 @@ h6 {
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
     --border-default: #334155;
-    --background: #0f172a;
-    --foreground: #f8fafc;
   }
 }
 
@@ -416,8 +406,8 @@ h6 {
    Base Styles
    ============================================================================ */
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   font-family: var(--font-body);
   transition: background-color 0.3s ease, color 0.3s ease;
 }

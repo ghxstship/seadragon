@@ -129,19 +129,19 @@ export default function MFASetupPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent text-[--text-primary]">
         <Header/>
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-md mx-auto">
-            <Card>
+            <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
               <CardContent className="pt-6">
                 <div className="text-center space-y-4">
-                  <CheckCircle2 className="h-12 w-12 text-semantic-success mx-auto"/>
-                  <h2 className="text-2xl font-bold">Two-Factor Authentication Enabled</h2>
-                  <p className="text-muted-foreground">
+                  <CheckCircle2 className="h-12 w-12 text-[--color-accent-primary] mx-auto"/>
+                  <h2 className="text-2xl heading-anton">Two-Factor Authentication Enabled</h2>
+                  <p className="text-[--text-secondary] body-share-tech">
                     Your account is now more secure with two-factor authentication enabled.
                   </p>
-                  <Button asChild>
+                  <Button asChild className="h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] hover:-translate-y-0.5 transition">
                     <Link href="/home">Continue to Dashboard</Link>
                   </Button>
                 </div>
@@ -154,18 +154,20 @@ export default function MFASetupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
       {/* Header */}
       <Header/>
 
       {/* MFA Setup */}
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-md mx-auto">
-          <Card>
-            <CardHeader className="text-center">
-              <ShieldCheck className="h-12 w-12 text-accent-primary mx-auto mb-4"/>
-              <CardTitle className="text-2xl">Set Up Two-Factor Authentication</CardTitle>
-              <CardDescription>
+          <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
+            <CardHeader className="text-center space-y-3">
+              <div className="inline-flex w-16 h-16 bg-[--color-accent-primary]/15 rounded-full items-center justify-center mx-auto">
+                <ShieldCheck className="h-8 w-8 text-[--color-accent-primary]"/>
+              </div>
+              <CardTitle className="text-2xl heading-anton">Set Up Two-Factor Authentication</CardTitle>
+              <CardDescription className="text-[--text-secondary] body-share-tech">
                 Add an extra layer of security to your account
               </CardDescription>
             </CardHeader>
@@ -173,46 +175,53 @@ export default function MFASetupPage() {
               {step === 'setup' && (
                 <>
                   <div className="text-center">
-                    <p className="text-sm text-muted-foreground mb-4">
+                    <p className="text-sm text-[--text-secondary] body-share-tech mb-4">
                       Two-factor authentication adds an extra layer of security by requiring a second form of verification when you sign in.
                     </p>
                   </div>
 
                   <Tabs value={method} onValueChange={(value) => setMethod(value as 'authenticator' | 'sms')}>
-                    <TabsList className="grid w-full grid-cols-2">
-                      <TabsTrigger value="authenticator">Authenticator App</TabsTrigger>
-                      <TabsTrigger value="sms">SMS</TabsTrigger>
+                    <TabsList className="grid w-full grid-cols-2 bg-[--surface-hover]">
+                      <TabsTrigger value="authenticator" className="data-[state=active]:bg-[--surface-default] data-[state=active]:text-[--text-primary]">Authenticator App</TabsTrigger>
+                      <TabsTrigger value="sms" className="data-[state=active]:bg-[--surface-default] data-[state=active]:text-[--text-primary]">SMS</TabsTrigger>
                     </TabsList>
 
                     <TabsContent value="authenticator" className="space-y-4">
                       <div className="text-center space-y-2">
-                        <Smartphone className="h-8 w-8 text-accent-primary mx-auto"/>
+                        <Smartphone className="h-8 w-8 text-[--color-accent-primary] mx-auto"/>
                         <div>
-                          <h3 className="font-semibold">Authenticator App</h3>
-                          <p className="text-sm text-muted-foreground">
+                          <h3 className="font-semibold text-[--text-primary]">Authenticator App</h3>
+                          <p className="text-sm text-[--text-secondary] body-share-tech">
                             Use an authenticator app like Google Authenticator, Authy, or 1Password
                           </p>
                         </div>
                       </div>
-                      <Button onClick={startAuthenticatorSetup} className="w-full" disabled={isLoading}>
+                      <Button onClick={startAuthenticatorSetup} className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5" disabled={isLoading}>
                         {isLoading ? 'Setting up...' : 'Set Up Authenticator'}
                       </Button>
                     </TabsContent>
 
                     <TabsContent value="sms" className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="phone">Phone Number</Label>
+                        <div>
+                          <h3 className="font-semibold text-[--text-primary]">SMS Verification</h3>
+                          <p className="text-sm text-[--text-secondary] body-share-tech">
+                            Receive verification codes via SMS
+                          </p>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="phone" className="text-[--text-secondary] body-share-tech">Phone Number</Label>
                         <Input
                           id="phone"
                           type="tel"
-                          placeholder="+1 (555) 123-4567"
+                          placeholder="(555) 123-4567"
                           value={phoneNumber}
-                          onChange={(e) => setPhoneNumber(e.target.value)}/>
-                        <p className="text-xs text-muted-foreground">
-                          We&apos;ll send a verification code to this number
-                        </p>
+                          onChange={(e) => setPhoneNumber(e.target.value)}
+                          className="h-11"
+                        />
                       </div>
-                      <Button onClick={startSMSSetup} className="w-full" disabled={isLoading}>
+                      <Button onClick={startSMSSetup} className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5" disabled={isLoading}>
                         {isLoading ? 'Sending code...' : 'Send Verification Code'}
                       </Button>
                     </TabsContent>
@@ -220,8 +229,8 @@ export default function MFASetupPage() {
 
                   {/* Error Message */}
                   {error && (
-                    <div className="flex items-center space-x-2 text-sm text-destructive bg-destructive/10 p-3 rounded">
-                      <AlertCircle className="h-4 w-4"/>
+                    <div className="flex items-center space-x-2 text-sm text-[--color-error] bg-[--color-error-light] p-3 rounded">
+                      <AlertCircle className="h-4 w-4 text-[--color-error]"/>
                       <span>{error}</span>
                     </div>
                   )}
@@ -229,87 +238,77 @@ export default function MFASetupPage() {
               )}
 
               {step === 'verify' && (
-                <>
+                <div className="space-y-6">
+                  <div className="text-center space-y-2">
+                    <CheckCircle2 className="h-10 w-10 text-accent-primary mx-auto"/>
+                    <h3 className="font-semibold text-[--text-primary]">Enter Verification Code</h3>
+                    <p className="text-sm text-[--text-secondary] body-share-tech">
+                      Enter the code from your authenticator app or SMS
+                    </p>
+                  </div>
                   {method === 'authenticator' && qrCode && (
                     <div className="text-center space-y-4">
                       <h3 className="font-semibold">Scan QR Code</h3>
                       <p className="text-sm text-muted-foreground">
                         Scan this QR code with your authenticator app
                       </p>
-                      <div className="bg-background p-4 rounded-lg inline-block">
-                        <Image src={qrCode} alt="QR Code" width={192} height={192} className="w-48 h-48"/>
+                      <div className="flex justify-center">
+                        <Image src={qrCode} alt="QR Code" width={200} height={200}/>
                       </div>
-                      <div className="text-left">
-                        <p className="text-xs text-muted-foreground mb-2">
-                          Can&apos;t scan? Enter this code manually:
-                        </p>
-                        <code className="text-xs bg-muted p-2 rounded block break-all">
-                          {secret}
-                        </code>
+                      <div className="bg-[--surface-hover] p-3 rounded border border-[--border-default]">
+                        <p className="text-sm font-mono break-all text-[--text-primary]">{secret}</p>
                       </div>
                     </div>
                   )}
 
                   {method === 'sms' && (
-                    <div className="text-center space-y-4">
-                      <Smartphone className="h-8 w-8 text-accent-primary mx-auto"/>
-                      <div>
-                        <h3 className="font-semibold">Check Your Phone</h3>
-                        <p className="text-sm text-muted-foreground">
-                          We sent a verification code to {phoneNumber}
-                        </p>
-                      </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="verificationCode" className="text-[--text-secondary] body-share-tech">Verification Code</Label>
+                      <Input
+                        id="verificationCode"
+                        type="text"
+                        placeholder="123456"
+                        value={verificationCode}
+                        onChange={(e) => setVerificationCode(e.target.value)}
+                        className="h-11"
+                      />
                     </div>
                   )}
 
-                  <div className="space-y-2">
-                    <Label htmlFor="code">Verification Code</Label>
-                    <Input
-                      id="code"
-                      type="text"
-                      placeholder="Enter 6-digit code"
-                      value={verificationCode}
-                      onChange={(e) => setVerificationCode(e.target.value)}
-                      maxLength={6}/>
-                  </div>
-
-                  {/* Error Message */}
                   {error && (
-                    <div className="flex items-center space-x-2 text-sm text-destructive bg-destructive/10 p-3 rounded">
-                      <AlertCircle className="h-4 w-4"/>
+                    <div className="flex items-center space-x-2 text-sm text-[--color-error] bg-[--color-error-light] p-3 rounded">
+                      <AlertCircle className="h-4 w-4 text-[--color-error]"/>
                       <span>{error}</span>
                     </div>
                   )}
 
-                  <Button onClick={verifyCode} className="w-full" disabled={isLoading}>
+                  <Button onClick={verifyCode} className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5" disabled={isLoading}>
                     {isLoading ? 'Verifying...' : 'Verify Code'}
                   </Button>
 
-                  <Button
-                    variant="ghost"
-                    onClick={() => setStep('setup')}
-                    className="w-full"
-                  >
-                    Back to Setup
+                  <Button variant="ghost" onClick={skipMFA} className="w-full">
+                    Skip for now
                   </Button>
-                </>
+                </div>
               )}
-
-              {/* Skip Option */}
-              <div className="pt-4 border-t">
-                <Button
-                  variant="ghost"
-                  onClick={skipMFA}
-                  className="w-full text-muted-foreground hover:text-foreground"
-                >
-                  Skip for now
-                </Button>
-                <p className="text-xs text-muted-foreground text-center mt-2">
-                  You can enable 2FA later in your account settings
-                </p>
-              </div>
             </CardContent>
           </Card>
+
+          {/* Help Section */}
+          <div className="mt-6 p-4 bg-[--surface-hover] rounded-lg border border-[--border-default] space-y-3">
+            <h3 className="font-medium heading-anton">Need Help?</h3>
+            <p className="text-sm text-[--text-secondary] body-share-tech">
+              If you encounter any issues setting up MFA, visit our support center or contact support.
+            </p>
+            <div className="flex space-x-3">
+              <Button variant="outline" asChild className="flex-1 h-11 rounded-full border-[--border-default] bg-[--surface-default] text-[--text-primary]">
+                <Link href="/support">Support Center</Link>
+              </Button>
+              <Button variant="outline" asChild className="flex-1 h-11 rounded-full border-[--border-default] bg-[--surface-default] text-[--text-primary]">
+                <Link href="/support/contact">Contact Support</Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,10 @@
 
 import { Metadata } from 'next'
-import { Button } from "@/components/ui/button"
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Header } from '@/lib/design-system'
+import { ArrowLeft, CheckCircle } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Check Your Email | ATLVS + GVTEWAY',
@@ -9,56 +13,66 @@ export const metadata: Metadata = {
 
 export default function VerifyEmailSentPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-md mx-auto">
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-semantic-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-2xl"></span>
-          </div>
-          <h1 className="text-2xl font-bold text-neutral-900 mb-2">Check Your Email</h1>
-          <p className="text-neutral-600">We&apos;ve sent you a verification link</p>
-        </div>
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
+      <Header/>
 
-        <div className="bg-background rounded-lg shadow-md p-6 mb-6">
-          <div className="text-center">
-            <p className="text-neutral-600 mb-6">
-              We sent a verification link to your email address. Click the link in the email to verify your account and complete your registration.
-            </p>
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-md mx-auto space-y-6">
+          <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur animate-fade-in">
+            <CardHeader className="text-center space-y-2">
+              <CardTitle className="text-3xl leading-tight heading-anton">Check Your Email</CardTitle>
+              <CardDescription className="text-[--text-secondary] body-share-tech">
+                We&apos;ve sent you a verification link
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-5 text-center">
+              <div className="w-16 h-16 rounded-full bg-[--color-success-light] flex items-center justify-center mx-auto">
+                <CheckCircle className="h-8 w-8 text-[--color-success]" />
+              </div>
 
-            <div className="bg-blue-50 rounded-lg p-4 mb-6">
-              <p className="text-sm text-blue-800">
-                <strong>Didn&apos;t receive the email?</strong><br/>
-                Check your spam folder, or click below to resend.
+              <p className="text-[--text-secondary] body-share-tech">
+                We sent a verification link to your email address. Click the link in the email to verify your account and complete your registration.
               </p>
-            </div>
 
-            <Button className="w-full bg-accent-secondary text-primary-foreground py-2 px-4 rounded-md hover:bg-accent-tertiary focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 mb-4">
-              Resend Verification Email
-            </Button>
+              <div className="bg-[--color-info-light] rounded-lg p-4 text-left space-y-1">
+                <p className="text-sm text-[--text-primary] font-medium heading-anton">Didn&apos;t receive the email?</p>
+                <p className="text-sm text-[--text-secondary] body-share-tech">
+                  Check your spam folder, or click below to resend.
+                </p>
+              </div>
 
-            <Button className="w-full bg-background text-accent-secondary border border-blue-600 py-2 px-4 rounded-md hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">
-              Change Email Address
-            </Button>
+              <div className="grid grid-cols-1 gap-3">
+                <Button className="h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5">
+                  Resend Verification Email
+                </Button>
+                <Button variant="outline" className="h-11 rounded-full border-[--border-default] bg-white text-[--text-primary]">
+                  Change Email Address
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_8px_22px_rgba(0,0,0,0.07)] backdrop-blur animate-fade-in">
+            <CardContent className="p-4 space-y-3">
+              <h3 className="text-sm font-medium text-[--text-primary] heading-anton">What happens next?</h3>
+              <ol className="text-sm text-[--text-secondary] body-share-tech space-y-1 list-decimal list-inside">
+                <li>Open your email inbox</li>
+                <li>Find the email from ATLVS + GVTEWAY</li>
+                <li>Click the verification link</li>
+                <li>You&apos;ll be automatically signed in</li>
+              </ol>
+            </CardContent>
+          </Card>
+
+          <div className="text-center text-sm text-[--text-secondary] space-y-1">
+            <p>
+              Already verified?{' '}
+              <Link href="/auth/login" className="text-[--color-accent-primary] hover:underline inline-flex items-center gap-1">
+                <ArrowLeft className="h-4 w-4"/>
+                Sign in here
+              </Link>
+            </p>
           </div>
-        </div>
-
-        <div className="bg-gray-50 rounded-lg p-4">
-          <h3 className="text-sm font-medium text-neutral-900 mb-2">What happens next?</h3>
-          <ol className="text-sm text-neutral-600 space-y-1">
-            <li>1. Open your email inbox</li>
-            <li>2. Find the email from ATLVS + GVTEWAY</li>
-            <li>3. Click the verification link</li>
-            <li>4. You&apos;ll be automatically signed in</li>
-          </ol>
-        </div>
-
-        <div className="text-center mt-6">
-          <p className="text-sm text-neutral-600">
-            Already verified?{' '}
-            <a href="/auth/login" className="text-accent-secondary hover:text-blue-800">
-              Sign in here
-            </a>
-          </p>
         </div>
       </div>
     </div>

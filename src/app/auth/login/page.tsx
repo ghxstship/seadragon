@@ -162,7 +162,7 @@ function LoginForm() {
                 )}
 
                 {/* Submit Button */}
-                <Button type="submit" className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5" disabled={isLoading}>
+                <Button type="submit" className="w-full h-11 rounded-full bg-[--color-accent-primary] text-black shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5" disabled={isLoading}>
                   {isLoading ? 'Signing in...' : 'Sign In'}
                 </Button>
               </form>

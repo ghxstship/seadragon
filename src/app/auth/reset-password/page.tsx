@@ -115,23 +115,23 @@ function ResetPasswordForm() {
 
   if (tokenValid === false) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent text-[--text-primary]">
         <Header/>
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-md mx-auto">
-            <Card>
+            <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
               <CardContent className="pt-6">
                 <div className="text-center space-y-4">
-                  <AlertCircle className="h-12 w-12 text-destructive mx-auto"/>
-                  <h2 className="text-2xl font-bold">Invalid Reset Link</h2>
-                  <p className="text-muted-foreground">
+                  <AlertCircle className="h-12 w-12 text-[--color-error] mx-auto"/>
+                  <h2 className="text-2xl heading-anton">Invalid Reset Link</h2>
+                  <p className="text-[--text-secondary] body-share-tech">
                     This password reset link is invalid or has expired. Please request a new password reset.
                   </p>
                   <div className="space-y-2">
-                    <Button asChild>
+                    <Button asChild className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white">
                       <Link href="/auth/forgot-password">Request New Reset Link</Link>
                     </Button>
-                    <Button variant="outline" asChild>
+                    <Button variant="outline" asChild className="w-full h-11 rounded-full border-[--border-default] bg-white text-[--text-primary]">
                       <Link href="/auth/login">
                         <ArrowLeft className="h-4 w-4 mr-2"/>
                         Back to Sign In
@@ -149,19 +149,19 @@ function ResetPasswordForm() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent text-[--text-primary]">
         <Header/>
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-md mx-auto">
-            <Card>
+            <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
               <CardContent className="pt-6">
                 <div className="text-center space-y-4">
-                  <CheckCircle className="h-12 w-12 text-semantic-success mx-auto"/>
-                  <h2 className="text-2xl font-bold">Password Updated!</h2>
-                  <p className="text-muted-foreground">
+                  <CheckCircle className="h-12 w-12 text-[--color-success] mx-auto"/>
+                  <h2 className="text-2xl heading-anton">Password Updated!</h2>
+                  <p className="text-[--text-secondary] body-share-tech">
                     Your password has been successfully reset. You can now sign in with your new password.
                   </p>
-                  <Button asChild>
+                  <Button asChild className="h-11 rounded-full bg-[--color-accent-primary] text-white">
                     <Link href="/auth/login">Continue to Sign In</Link>
                   </Button>
                 </div>
@@ -175,15 +175,15 @@ function ResetPasswordForm() {
 
   if (tokenValid === null) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent text-[--text-primary]">
         <Header/>
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-md mx-auto">
-            <Card>
+            <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
               <CardContent className="pt-6">
-                <div className="text-center">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-primary mx-auto mb-4"></div>
-                  <p className="text-muted-foreground">Validating reset link...</p>
+                <div className="text-center space-y-3">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[--color-accent-primary] mx-auto" />
+                  <p className="text-[--text-secondary] body-share-tech">Validating reset link...</p>
                 </div>
               </CardContent>
             </Card>
@@ -194,25 +194,22 @@ function ResetPasswordForm() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
       <Header/>
 
-      {/* Reset Password Form */}
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-md mx-auto">
-          <Card>
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl">Reset Your Password</CardTitle>
-              <CardDescription>
+          <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
+            <CardHeader className="text-center space-y-2">
+              <CardTitle className="text-3xl leading-tight heading-anton">Reset Your Password</CardTitle>
+              <CardDescription className="text-[--text-secondary] body-share-tech">
                 Enter your new password below
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-5">
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* New Password */}
                 <div className="space-y-2">
-                  <Label htmlFor="password">New Password</Label>
+                  <Label htmlFor="password" className="text-[--text-secondary] body-share-tech">New Password</Label>
                   <div className="relative">
                     <Input
                       id="password"
@@ -235,14 +232,13 @@ function ResetPasswordForm() {
                       )}
                     </Button>
                   </div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-[--text-muted] body-share-tech">
                     Password must be at least 8 characters long
                   </p>
                 </div>
 
-                {/* Confirm Password */}
                 <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Confirm New Password</Label>
+                  <Label htmlFor="confirmPassword" className="text-[--text-secondary] body-share-tech">Confirm New Password</Label>
                   <div className="relative">
                     <Input
                       id="confirmPassword"
@@ -267,25 +263,26 @@ function ResetPasswordForm() {
                   </div>
                 </div>
 
-                {/* Error Message */}
                 {error && (
-                  <div className="flex items-center space-x-2 text-sm text-destructive bg-destructive/10 p-3 rounded">
+                  <div className="flex items-center space-x-2 text-sm text-[--color-error] bg-[--color-error-light] p-3 rounded">
                     <AlertCircle className="h-4 w-4"/>
                     <span>{error}</span>
                   </div>
                 )}
 
-                {/* Submit Button */}
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button
+                  type="submit"
+                  className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5"
+                  disabled={isLoading}
+                >
                   {isLoading ? 'Updating Password...' : 'Update Password'}
                 </Button>
               </form>
 
-              {/* Links */}
-              <div className="text-center space-y-2 pt-4 border-t">
+              <div className="text-center space-y-2 pt-4 border-t border-[--border-default]">
                 <Link
                   href="/auth/login"
-                  className="text-sm text-accent-primary hover:underline flex items-center justify-center"
+                  className="text-sm text-[--color-accent-primary] hover:underline flex items-center justify-center"
                 >
                   <ArrowLeft className="h-4 w-4 mr-2"/>
                   Back to Sign In
@@ -302,15 +299,15 @@ function ResetPasswordForm() {
 export default function ResetPasswordPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent text-[--text-primary]">
         <Header/>
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-md mx-auto">
-            <Card>
+            <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
               <CardContent className="pt-6">
-                <div className="text-center">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-primary mx-auto mb-4"></div>
-                  <p className="text-muted-foreground">Loading...</p>
+                <div className="text-center space-y-3">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[--color-accent-primary] mx-auto" />
+                  <p className="text-[--text-secondary] body-share-tech">Loading...</p>
                 </div>
               </CardContent>
             </Card>

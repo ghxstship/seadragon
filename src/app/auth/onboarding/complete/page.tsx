@@ -1,6 +1,4 @@
-
 'use client'
-
 
 import { useState, useEffect } from "react"
 import { useRouter } from 'next/navigation'
@@ -12,14 +10,14 @@ import { Progress } from "@/components/ui/progress"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Header } from "@/lib/design-system"
 import { logger } from "@/lib/logger"
-import { CheckCircle, Star, MapPin, Calendar, Users, Heart, Award, Rocket, ArrowRight, Sparkles, Gift, TrendingUp, Clock } from "lucide-react"
+import { type LucideIcon, CheckCircle, Star, MapPin, Calendar, Users, Heart, Award, Rocket, ArrowRight, Sparkles, Gift, TrendingUp, Clock } from "lucide-react"
 
 interface OnboardingStep {
   id: string
   title: string
   description: string
   completed: boolean
-  icon: React.ComponentType<{ className?: string }>
+  icon: LucideIcon
   action?: {
     label: string
     href: string
@@ -202,8 +200,10 @@ export default function OnboardingCompletePage() {
   const completedCount = onboardingSteps.filter(step => step.completed).length
   const progressPercentage = (completedCount / onboardingSteps.length) * 100
 
+  const cardClass = "border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur"
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
       {/* Header */}
       <Header/>
 
@@ -220,22 +220,22 @@ export default function OnboardingCompletePage() {
         <div className="max-w-6xl mx-auto">
           {/* Welcome Hero */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-24 h-24 bg-accent-primary/20 rounded-full mb-8">
-              <CheckCircle className="h-12 w-12 text-accent-primary"/>
+            <div className="inline-flex items-center justify-center w-24 h-24 bg-[--color-accent-primary]/15 rounded-full mb-8">
+              <CheckCircle className="h-12 w-12 text-[--color-accent-primary]"/>
             </div>
-            <h1 className="text-5xl font-display font-bold mb-4">
+            <h1 className="text-5xl heading-anton mb-4">
               Welcome to ATLVS + GVTEWAY!
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+            <p className="text-xl text-[--text-secondary] body-share-tech max-w-2xl mx-auto mb-8">
               Your account setup is complete! You&apos;re now ready to discover amazing travel experiences,
               connect with fellow adventurers, and create unforgettable memories.
             </p>
             <div className="flex justify-center space-x-4">
-              <Button size="lg" onClick={handleContinue} className="px-8">
+              <Button size="lg" onClick={handleContinue} className="px-8 h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] hover:-translate-y-0.5 transition">
                 <Rocket className="h-5 w-5 mr-2"/>
                 Start Exploring
               </Button>
-              <Button variant="outline" size="lg" asChild>
+              <Button variant="outline" size="lg" asChild className="h-11 rounded-full border-[--border-default] bg-[--surface-default] text-[--text-primary]">
                 <Link href="/home/profile">
                   <Sparkles className="h-5 w-5 mr-2"/>
                   Complete Profile
@@ -247,13 +247,13 @@ export default function OnboardingCompletePage() {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Onboarding Progress */}
             <div className="lg:col-span-2">
-              <Card className="mb-8">
+              <Card className={`mb-8 ${cardClass}`}>
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Award className="h-5 w-5 mr-2 text-accent-primary"/>
+                  <CardTitle className="flex items-center heading-anton">
+                    <Award className="h-5 w-5 mr-2 text-[--color-accent-primary]"/>
                     Onboarding Progress
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-[--text-secondary] body-share-tech">
                     Track your setup completion and unlock premium features
                   </CardDescription>
                 </CardHeader>
@@ -274,12 +274,12 @@ export default function OnboardingCompletePage() {
                         key={step.id}
                         className={`flex items-start space-x-4 p-4 rounded-lg border transition-colors ${
                           step.completed
-                            ? 'bg-green-50 border-green-200'
-                            : 'bg-muted/50 border-muted'
+                            ? 'bg-semantic-success/5 border-semantic-success/40'
+                            : 'bg-[--surface-hover] border-[--border-default]'
                         }`}
                       >
                         <div className={`p-2 rounded-full ${
-                          step.completed ? 'bg-semantic-success/10' : 'bg-muted'
+                          step.completed ? 'bg-semantic-success/10' : 'bg-[--surface-default]'
                         }`}>
                           <step.icon className={`h-4 w-4 ${
                             step.completed ? 'text-semantic-success' : 'text-muted-foreground'
@@ -295,11 +295,11 @@ export default function OnboardingCompletePage() {
                               </Badge>
                             )}
                           </div>
-                          <p className="text-sm text-muted-foreground mt-1">
+                          <p className="text-sm text-[--text-secondary] body-share-tech mt-1">
                             {step.description}
                           </p>
                           {!step.completed && step.action && (
-                            <Button variant="outline" size="sm" className="mt-2" asChild>
+                            <Button variant="outline" size="sm" className="mt-2 h-9 rounded-full border-[--border-default] bg-[--surface-default] text-[--text-primary]" asChild>
                               <Link href={step.action.href}>
                                 {step.action.label}
                               </Link>
@@ -313,13 +313,13 @@ export default function OnboardingCompletePage() {
               </Card>
 
               {/* Personalized Recommendations */}
-              <Card className="mb-8">
+              <Card className={`mb-8 ${cardClass}`}>
                 <CardHeader>
-                  <CardTitle className="flex items-center">
+                  <CardTitle className="flex items-center heading-anton">
                     <Star className="h-5 w-5 mr-2 text-semantic-warning"/>
                     Recommended for You
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-[--text-secondary] body-share-tech">
                     Based on your interests, here are some personalized suggestions
                   </CardDescription>
                 </CardHeader>
@@ -342,7 +342,7 @@ export default function OnboardingCompletePage() {
                         </div>
                         <CardContent className="p-4">
                           <h4 className="font-semibold mb-2 line-clamp-2">{rec.title}</h4>
-                          <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                          <p className="text-sm text-[--text-secondary] body-share-tech mb-3 line-clamp-2">
                             {rec.description}
                           </p>
                           <div className="flex items-center justify-between text-xs text-muted-foreground">
@@ -375,13 +375,13 @@ export default function OnboardingCompletePage() {
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Member Benefits */}
-              <Card>
+              <Card className={cardClass}>
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Gift className="h-5 w-5 mr-2 text-accent-primary"/>
+                  <CardTitle className="flex items-center heading-anton">
+                    <Gift className="h-5 w-5 mr-2 text-[--color-accent-primary]"/>
                     Member Benefits
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-[--text-secondary] body-share-tech">
                     Enjoy these exclusive perks as a member
                   </CardDescription>
                 </CardHeader>
@@ -390,7 +390,7 @@ export default function OnboardingCompletePage() {
                     {benefits.map((benefit, index) => (
                       <li key={index} className="flex items-start space-x-3">
                         <CheckCircle className="h-4 w-4 text-semantic-success mt-0.5 flex-shrink-0"/>
-                        <span className="text-sm">{benefit}</span>
+                        <span className="text-sm text-[--text-primary]">{benefit}</span>
                       </li>
                     ))}
                   </ul>
@@ -398,13 +398,13 @@ export default function OnboardingCompletePage() {
               </Card>
 
               {/* Next Steps */}
-              <Card>
+              <Card className={cardClass}>
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <TrendingUp className="h-5 w-5 mr-2 text-accent-primary"/>
+                  <CardTitle className="flex items-center heading-anton">
+                    <TrendingUp className="h-5 w-5 mr-2 text-[--color-accent-primary]"/>
                     Next Steps
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-[--text-secondary] body-share-tech">
                     Get the most out of your membership
                   </CardDescription>
                 </CardHeader>
@@ -413,12 +413,12 @@ export default function OnboardingCompletePage() {
                     {nextSteps.map((step, index) => (
                       <div key={index} className="flex items-start space-x-3">
                         <div className="p-2 bg-accent-primary/10 rounded-lg">
-                          <step.icon className="h-4 w-4 text-accent-primary"/>
+                          <step.icon className="h-4 w-4 text-[--color-accent-primary]"/>
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-medium text-sm">{step.title}</h4>
-                          <p className="text-xs text-muted-foreground mb-2">{step.description}</p>
-                          <Button variant="outline" size="sm" asChild>
+                          <h4 className="font-medium text-sm text-[--text-primary]">{step.title}</h4>
+                          <p className="text-sm text-[--text-secondary] body-share-tech">{step.description}</p>
+                          <Button variant="link" className="px-0 text-accent-primary" asChild>
                             <Link href={step.action.href}>
                               {step.action.label}
                               <ArrowRight className="h-3 w-3 ml-1"/>

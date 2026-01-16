@@ -96,19 +96,19 @@ export default function VerifyEmailPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent text-[--text-primary]">
         <Header/>
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-md mx-auto">
-            <Card>
+            <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
               <CardContent className="pt-6">
                 <div className="text-center space-y-4">
-                  <CheckCircle className="h-12 w-12 text-semantic-success mx-auto"/>
-                  <h2 className="text-2xl font-bold">Email Verified!</h2>
-                  <p className="text-muted-foreground">
+                  <CheckCircle className="h-12 w-12 text-[--color-success] mx-auto"/>
+                  <h2 className="text-3xl heading-anton">Email Verified!</h2>
+                  <p className="text-[--text-secondary] body-share-tech">
                     Your email has been successfully verified. You can now sign in to your account.
                   </p>
-                  <Button asChild>
+                  <Button asChild className="h-11 rounded-full bg-[--color-accent-primary] text-black">
                     <Link href="/auth/login">Continue to Sign In</Link>
                   </Button>
                 </div>
@@ -122,28 +122,28 @@ export default function VerifyEmailPage() {
 
   if (token && !success) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent text-[--text-primary]">
         <Header/>
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-md mx-auto">
-            <Card>
+            <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
               <CardContent className="pt-6">
                 <div className="text-center space-y-4">
                   {isLoading ? (
                     <>
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-primary mx-auto"></div>
-                      <p className="text-muted-foreground">Verifying your email...</p>
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[--color-accent-primary] mx-auto" />
+                      <p className="text-[--text-secondary] body-share-tech">Verifying your email...</p>
                     </>
                   ) : error ? (
                     <>
-                      <AlertCircle className="h-12 w-12 text-destructive mx-auto"/>
-                      <h2 className="text-2xl font-bold">Verification Failed</h2>
-                      <p className="text-muted-foreground">{error}</p>
+                      <AlertCircle className="h-12 w-12 text-[--color-error] mx-auto"/>
+                      <h2 className="text-2xl heading-anton">Verification Failed</h2>
+                      <p className="text-[--text-secondary] body-share-tech">{error}</p>
                       <div className="space-y-2">
-                        <Button onClick={resendVerificationEmail} disabled={isLoading}>
+                        <Button onClick={resendVerificationEmail} disabled={isLoading} className="h-11 rounded-full bg-[--color-accent-primary] text-black">
                           Resend Verification Email
                         </Button>
-                        <Button variant="outline" asChild>
+                        <Button variant="outline" asChild className="h-11 rounded-full border-[--border-default] bg-white text-[--text-primary]">
                           <Link href="/auth/login">
                             <ArrowLeft className="h-4 w-4 mr-2"/>
                             Back to Sign In
@@ -162,30 +162,28 @@ export default function VerifyEmailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
       <Header/>
 
-      {/* Email Verification */}
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-md mx-auto">
-          <Card>
+          <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
             <CardHeader className="text-center">
-              <Mail className="h-12 w-12 text-accent-primary mx-auto mb-4"/>
-              <CardTitle className="text-2xl">Check Your Email</CardTitle>
-              <CardDescription>
+              <Mail className="h-12 w-12 text-[--color-accent-primary] mx-auto mb-4"/>
+              <CardTitle className="text-3xl leading-tight heading-anton">Check Your Email</CardTitle>
+              <CardDescription className="text-[--text-secondary] body-share-tech">
                 We&apos;ve sent a verification link to{' '}
                 <strong>{email || 'your email address'}</strong>
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-5">
               <div className="text-center space-y-4">
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-[--text-secondary] body-share-tech">
                   Click the link in the email to verify your account and complete your registration.
                 </p>
 
                 {emailSent && (
-                  <div className="flex items-center space-x-2 text-sm text-semantic-success bg-green-50 dark:bg-green-900/20 p-3 rounded">
+                  <div className="flex items-center space-x-2 text-sm text-[--color-success] bg-[--color-success-light] p-3 rounded">
                     <CheckCircle className="h-4 w-4"/>
                     <span>Verification email sent!</span>
                   </div>
@@ -196,18 +194,18 @@ export default function VerifyEmailPage() {
                     onClick={resendVerificationEmail}
                     disabled={isLoading}
                     variant="outline"
-                    className="w-full"
+                    className="w-full h-11 rounded-full border-[--border-default] bg-white text-[--text-primary]"
                   >
                     {isLoading ? 'Sending...' : 'Resend Verification Email'}
                   </Button>
 
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm text-[--text-secondary]">
                     Didn&apos;t receive the email? Check your spam folder.
                   </div>
 
                   <Link
                     href="/auth/login"
-                    className="text-sm text-accent-primary hover:underline flex items-center justify-center"
+                    className="text-sm text-[--color-accent-primary] hover:underline flex items-center justify-center"
                   >
                     <ArrowLeft className="h-4 w-4 mr-2"/>
                     Back to Sign In
@@ -215,10 +213,9 @@ export default function VerifyEmailPage() {
                 </div>
               </div>
 
-              {/* Help Section */}
-              <div className="pt-4 border-t">
-                <h3 className="font-medium mb-2">Need Help?</h3>
-                <div className="text-sm text-muted-foreground space-y-1">
+              <div className="pt-4 border-t border-[--border-default] space-y-2">
+                <h3 className="font-medium heading-anton">Need Help?</h3>
+                <div className="text-sm text-[--text-secondary] body-share-tech space-y-1">
                   <p>• Make sure to check your spam/junk folder</p>
                   <p>• The verification link expires in 24 hours</p>
                   <p>• Contact support if you continue having issues</p>

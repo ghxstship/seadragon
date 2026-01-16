@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Header } from "@/lib/design-system"
-import { User, Building, Shield, CheckCircle, Plus, ArrowRight, AlertTriangle, Users, Crown, Briefcase } from "lucide-react"
+import { User, Building, Shield, CheckCircle, Plus, ArrowRight, AlertTriangle, Users, Briefcase } from "lucide-react"
 
 interface Account {
   id: string
@@ -49,7 +49,6 @@ export default function SwitchAccountPage() {
   const [accounts, setAccounts] = useState<Account[]>([])
   const [isSwitching, setIsSwitching] = useState(false)
   const [selectedAccount, setSelectedAccount] = useState<Account | null>(null)
-  const [showAddAccount, setShowAddAccount] = useState(false)
 
   useEffect(() => {
     let cancelled = false
@@ -170,20 +169,22 @@ export default function SwitchAccountPage() {
   const organizationAccounts = accounts.filter(a => a.type === 'organization')
   const professionalAccounts = accounts.filter(a => a.type === 'professional')
 
+  const cardClass = "border border-[--border-default] bg-[--surface-default]/90 backdrop-blur shadow-[0_12px_30px_rgba(0,0,0,0.08)]"
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
       {/* Header */}
       <Header/>
 
       {/* Breadcrumb */}
-      <nav className="bg-muted/50 px-4 py-3">
+      <nav className="px-4 py-3">
         <div className="container mx-auto">
-          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground">Home</Link>
+          <div className="flex items-center space-x-2 text-sm text-[--text-secondary] body-share-tech">
+            <Link href="/" className="hover:text-[--text-primary]">Home</Link>
             <span>/</span>
-            <Link href="/dashboard" className="hover:text-foreground">Dashboard</Link>
+            <Link href="/dashboard" className="hover:text-[--text-primary]">Dashboard</Link>
             <span>/</span>
-            <span className="text-foreground font-medium">Switch Account</span>
+            <span className="text-[--text-primary] font-semibold">Switch Account</span>
           </div>
         </div>
       </nav>
@@ -192,26 +193,26 @@ export default function SwitchAccountPage() {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-accent-primary/20 rounded-full mb-6">
-              <User className="h-10 w-10 text-accent-primary"/>
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-[--color-accent-primary]/15 rounded-full mb-6">
+              <User className="h-10 w-10 text-[--color-accent-primary]"/>
             </div>
-            <h1 className="text-4xl font-display font-bold mb-4">Switch Account</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <h1 className="text-4xl heading-anton mb-4">Switch Account</h1>
+            <p className="text-lg text-[--text-secondary] body-share-tech max-w-2xl mx-auto">
               Choose which account or organization you&apos;d like to use. Your data and preferences are kept separate for each account.
             </p>
           </div>
 
           {/* Current Account Highlight */}
-          <Card className="mb-8 bg-accent-primary/5 border-accent-primary/20">
+          <Card className={`mb-8 ${cardClass}`}>
             <CardContent className="p-6">
               <div className="flex items-center space-x-4">
-                <div className="p-3 bg-accent-primary/20 rounded-full">
-                  <CheckCircle className="h-6 w-6 text-accent-primary"/>
+                <div className="p-3 bg-[--color-accent-primary]/15 rounded-full">
+                  <CheckCircle className="h-6 w-6 text-[--color-accent-primary]"/>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold mb-1">Current Account</h3>
-                  <p className="text-muted-foreground">
-                    You're currently signed in as {accounts.find(a => a.isCurrent)?.name || 'Unknown'}
+                  <h3 className="text-lg font-semibold heading-anton mb-1">Current Account</h3>
+                  <p className="text-[--text-secondary] body-share-tech">
+                    You&apos;re currently signed in as {accounts.find(a => a.isCurrent)?.name || 'Unknown'}
                   </p>
                 </div>
               </div>
@@ -222,48 +223,48 @@ export default function SwitchAccountPage() {
             {/* Personal Accounts */}
             <div className="space-y-6">
               <div>
-                <h2 className="text-2xl font-display font-bold mb-4 flex items-center">
+                <h2 className="text-2xl heading-anton mb-4 flex items-center">
                   <User className="h-6 w-6 mr-2 text-semantic-success"/>
                   Personal
                 </h2>
                 <div className="space-y-4">
                   {personalAccounts.map((account) => (
-                    <Card key={account.id} className={`cursor-pointer transition-all hover:shadow-lg ${
-                      account.isCurrent ? 'ring-2 ring-accent-primary bg-accent-primary/5' : ''
+                    <Card key={account.id} className={`cursor-pointer transition-all hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(0,0,0,0.12)] ${
+                      account.isCurrent ? 'ring-2 ring-[--color-accent-primary] bg-[--surface-default]' : cardClass
                     } ${account.status !== 'active' ? 'opacity-60' : ''}`}>
                       <CardContent className="p-6">
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex items-center space-x-3">
-                            <div className={`p-2 rounded-full ${getAccountColor(account.type)} bg-muted`}>
+                            <div className={`p-2 rounded-full ${getAccountColor(account.type)} bg-[--surface-hover]`}>
                               {getAccountIcon(account.type)}
                             </div>
                             <div>
-                              <h3 className="font-semibold">{account.name}</h3>
-                              <p className="text-sm text-muted-foreground">{account.email}</p>
+                              <h3 className="font-semibold text-[--text-primary]">{account.name}</h3>
+                              <p className="text-sm text-[--text-secondary] body-share-tech">{account.email}</p>
                             </div>
                           </div>
                           <div className="flex flex-col items-end space-y-2">
                             {account.isCurrent && (
-                              <Badge variant="default">Current</Badge>
+                              <Badge variant="secondary" className="bg-[--color-accent-primary]/10 text-[--color-accent-primary]">Current</Badge>
                             )}
                             {getStatusBadge(account.status)}
                           </div>
                         </div>
 
-                        <div className="text-sm text-muted-foreground mb-4">
+                        <div className="text-sm text-[--text-secondary] body-share-tech mb-4">
                           <p>Role: {account.role}</p>
                           <p>Last active: {formatLastActive(account.lastActive)}</p>
                         </div>
 
                         <div className="flex space-x-2">
                           {account.isCurrent ? (
-                            <Button disabled className="flex-1">
+                            <Button disabled className="flex-1 h-10 rounded-full">
                               <CheckCircle className="h-4 w-4 mr-2"/>
                               Active
                             </Button>
                           ) : account.status === 'active' ? (
                             <Button
-                              className="flex-1"
+                              className="flex-1 h-10 rounded-full bg-[--color-accent-primary] text-white hover:-translate-y-0.5 transition"
                               onClick={() => handleSwitchAccount(account)}
                               disabled={isSwitching}
                             >
@@ -277,7 +278,7 @@ export default function SwitchAccountPage() {
                               )}
                             </Button>
                           ) : (
-                            <Button disabled variant="outline" className="flex-1">
+                            <Button disabled variant="outline" className="flex-1 h-10 rounded-full">
                               {account.status === 'suspended' ? 'Suspended' : 'Pending'}
                             </Button>
                           )}
@@ -292,39 +293,39 @@ export default function SwitchAccountPage() {
             {/* Organization Accounts */}
             <div className="space-y-6">
               <div>
-                <h2 className="text-2xl font-display font-bold mb-4 flex items-center">
-                  <Building className="h-6 w-6 mr-2 text-accent-secondary"/>
+                <h2 className="text-2xl heading-anton mb-4 flex items-center">
+                  <Building className="h-6 w-6 mr-2 text-[--color-accent-secondary]"/>
                   Organizations
                 </h2>
                 <div className="space-y-4">
                   {organizationAccounts.map((account) => (
-                    <Card key={account.id} className={`cursor-pointer transition-all hover:shadow-lg ${
-                      account.isCurrent ? 'ring-2 ring-accent-primary bg-accent-primary/5' : ''
+                    <Card key={account.id} className={`cursor-pointer transition-all hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(0,0,0,0.12)] ${
+                      account.isCurrent ? 'ring-2 ring-[--color-accent-primary] bg-[--surface-default]' : cardClass
                     } ${account.status !== 'active' ? 'opacity-60' : ''}`}>
                       <CardContent className="p-6">
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex items-center space-x-3">
-                            <div className={`p-2 rounded-full ${getAccountColor(account.type)} bg-muted`}>
+                            <div className={`p-2 rounded-full ${getAccountColor(account.type)} bg-[--surface-hover]`}>
                               {getAccountIcon(account.type)}
                             </div>
                             <div>
-                              <h3 className="font-semibold">{account.organization}</h3>
-                              <p className="text-sm text-muted-foreground">{account.email}</p>
+                              <h3 className="font-semibold text-[--text-primary]">{account.organization}</h3>
+                              <p className="text-sm text-[--text-secondary] body-share-tech">{account.email}</p>
                             </div>
                           </div>
                           <div className="flex flex-col items-end space-y-2">
                             {account.isCurrent && (
-                              <Badge variant="default">Current</Badge>
+                              <Badge variant="secondary" className="bg-[--color-accent-primary]/10 text-[--color-accent-primary]">Current</Badge>
                             )}
                             {getStatusBadge(account.status)}
                           </div>
                         </div>
 
-                        <div className="text-sm text-muted-foreground mb-4">
+                        <div className="text-sm text-[--text-secondary] body-share-tech mb-4">
                           <p>Role: {account.role}</p>
                           <p>Last active: {formatLastActive(account.lastActive)}</p>
                           <p className="mt-2">
-                            <Badge variant="outline" className="text-xs">
+                            <Badge variant="outline" className="text-xs bg-[--surface-hover] border-[--border-default] text-[--text-primary]">
                               <Users className="h-3 w-3 mr-1"/>
                               {account.permissions.length} permissions
                             </Badge>
@@ -333,7 +334,7 @@ export default function SwitchAccountPage() {
 
                         <div className="flex space-x-2">
                           {account.isCurrent ? (
-                            <Button disabled className="flex-1">
+                            <Button disabled className="flex-1 h-10 rounded-full">
                               <CheckCircle className="h-4 w-4 mr-2"/>
                               Active
                             </Button>
@@ -354,16 +355,16 @@ export default function SwitchAccountPage() {
                             </Button>
                           ) : account.status === 'suspended' ? (
                             <div className="flex-1">
-                              <Alert>
+                              <Alert className="border-[--border-default] bg-[--surface-default]/90">
                                 <AlertTriangle className="h-4 w-4"/>
-                                <AlertTitle>Account Suspended</AlertTitle>
-                                <AlertDescription className="text-xs">
+                                <AlertTitle className="heading-anton text-sm">Account Suspended</AlertTitle>
+                                <AlertDescription className="text-xs body-share-tech text-[--text-secondary]">
                                   Contact your organization admin to restore access.
                                 </AlertDescription>
                               </Alert>
                             </div>
                           ) : (
-                            <Button disabled variant="outline" className="flex-1">
+                            <Button disabled variant="outline" className="flex-1 h-10 rounded-full">
                               Pending Approval
                             </Button>
                           )}
@@ -373,37 +374,39 @@ export default function SwitchAccountPage() {
                   ))}
 
                   {organizationAccounts.length === 0 && (
-                    <Card>
-                      <CardContent className="p-6 text-center">
-                        <Building className="h-12 w-12 mx-auto mb-4 text-muted-foreground"/>
-                        <h3 className="font-semibold mb-2">No Organizations</h3>
-                        <p className="text-sm text-muted-foreground mb-4">
+                    <Card className={cardClass}>
+                      <CardContent className="p-6 text-center space-y-3">
+                        <Building className="h-12 w-12 mx-auto mb-2 text-[--color-accent-secondary]"/>
+                        <h3 className="font-semibold heading-anton">No Organizations</h3>
+                        <p className="text-sm text-[--text-secondary] body-share-tech">
                           You haven&apos;t been added to any organizations yet.
                         </p>
                         <Dialog>
                           <DialogTrigger asChild>
-                            <Button variant="outline">
+                            <Button variant="outline" className="rounded-full h-10">
                               <Plus className="h-4 w-4 mr-2"/>
                               Join Organization
                             </Button>
                           </DialogTrigger>
-                          <DialogContent>
+                          <DialogContent className="border-[--border-default] bg-[--surface-default]/95 backdrop-blur">
                             <DialogHeader>
-                              <DialogTitle>Join an Organization</DialogTitle>
-                              <DialogDescription>
+                              <DialogTitle className="heading-anton">Join an Organization</DialogTitle>
+                              <DialogDescription className="body-share-tech text-[--text-secondary]">
                                 Enter an organization code or email to join an existing organization.
                               </DialogDescription>
                             </DialogHeader>
                             <div className="space-y-4 pt-4">
                               <div>
-                                <label className="text-sm font-medium">Organization Code or Email</label>
+                                <label className="text-sm font-medium body-share-tech">Organization Code or Email</label>
                                 <Input
                                   type="text"
-                                  className="w-full px-3 py-2 border rounded-md mt-1"
+                                  className="w-full h-11 mt-1 border-[--border-default]"
                                   placeholder="Enter code or admin email"
                                 />
                               </div>
-                              <Button className="w-full">Send Request</Button>
+                              <Button className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white">
+                                Send Request
+                              </Button>
                             </div>
                           </DialogContent>
                         </Dialog>
@@ -417,48 +420,48 @@ export default function SwitchAccountPage() {
             {/* Professional Accounts */}
             <div className="space-y-6">
               <div>
-                <h2 className="text-2xl font-display font-bold mb-4 flex items-center">
-                  <Briefcase className="h-6 w-6 mr-2 text-accent-primary"/>
+                <h2 className="text-2xl heading-anton mb-4 flex items-center">
+                  <Briefcase className="h-6 w-6 mr-2 text-[--color-accent-primary]"/>
                   Professional
                 </h2>
                 <div className="space-y-4">
                   {professionalAccounts.map((account) => (
-                    <Card key={account.id} className={`cursor-pointer transition-all hover:shadow-lg ${
-                      account.isCurrent ? 'ring-2 ring-accent-primary bg-accent-primary/5' : ''
+                    <Card key={account.id} className={`cursor-pointer transition-all hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(0,0,0,0.12)] ${
+                      account.isCurrent ? 'ring-2 ring-[--color-accent-primary] bg-[--surface-default]' : cardClass
                     } ${account.status !== 'active' ? 'opacity-60' : ''}`}>
                       <CardContent className="p-6">
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex items-center space-x-3">
-                            <div className={`p-2 rounded-full ${getAccountColor(account.type)} bg-muted`}>
+                            <div className={`p-2 rounded-full ${getAccountColor(account.type)} bg-[--surface-hover]`}>
                               {getAccountIcon(account.type)}
                             </div>
                             <div>
-                              <h3 className="font-semibold">{account.name}</h3>
-                              <p className="text-sm text-muted-foreground">{account.email}</p>
+                              <h3 className="font-semibold text-[--text-primary]">{account.name}</h3>
+                              <p className="text-sm text-[--text-secondary] body-share-tech">{account.email}</p>
                             </div>
                           </div>
                           <div className="flex flex-col items-end space-y-2">
                             {account.isCurrent && (
-                              <Badge variant="default">Current</Badge>
+                              <Badge variant="secondary" className="bg-[--color-accent-primary]/10 text-[--color-accent-primary]">Current</Badge>
                             )}
                             {getStatusBadge(account.status)}
                           </div>
                         </div>
 
-                        <div className="text-sm text-muted-foreground mb-4">
+                        <div className="text-sm text-[--text-secondary] body-share-tech mb-4">
                           <p>Professional Account</p>
                           <p>Last active: {formatLastActive(account.lastActive)}</p>
                         </div>
 
                         <div className="flex space-x-2">
                           {account.isCurrent ? (
-                            <Button disabled className="flex-1">
+                            <Button disabled className="flex-1 h-10 rounded-full">
                               <CheckCircle className="h-4 w-4 mr-2"/>
                               Active
                             </Button>
                           ) : account.status === 'active' ? (
                             <Button
-                              className="flex-1"
+                              className="flex-1 h-10 rounded-full bg-[--color-accent-primary] text-white hover:-translate-y-0.5 transition"
                               onClick={() => handleSwitchAccount(account)}
                               disabled={isSwitching}
                             >
@@ -472,7 +475,7 @@ export default function SwitchAccountPage() {
                               )}
                             </Button>
                           ) : (
-                            <Button disabled variant="outline" className="flex-1">
+                            <Button disabled variant="outline" className="flex-1 h-10 rounded-full">
                               {account.status === 'suspended' ? 'Suspended' : 'Pending'}
                             </Button>
                           )}
@@ -482,14 +485,14 @@ export default function SwitchAccountPage() {
                   ))}
 
                   {professionalAccounts.length === 0 && (
-                    <Card>
-                      <CardContent className="p-6 text-center">
-                        <Briefcase className="h-12 w-12 mx-auto mb-4 text-muted-foreground"/>
-                        <h3 className="font-semibold mb-2">No Professional Accounts</h3>
-                        <p className="text-sm text-muted-foreground mb-4">
+                    <Card className={cardClass}>
+                      <CardContent className="p-6 text-center space-y-3">
+                        <Briefcase className="h-12 w-12 mx-auto mb-2 text-[--color-accent-primary]"/>
+                        <h3 className="font-semibold heading-anton">No Professional Accounts</h3>
+                        <p className="text-sm text-[--text-secondary] body-share-tech">
                           Create a professional account to sell experiences and manage bookings.
                         </p>
-                        <Button variant="outline" asChild>
+                        <Button variant="outline" asChild className="h-10 rounded-full border-[--border-default]">
                           <Link href="/auth/signup?type=professional">
                             <Plus className="h-4 w-4 mr-2"/>
                             Create Professional Account
@@ -505,31 +508,31 @@ export default function SwitchAccountPage() {
 
           {/* Add Account Section */}
           <div className="mt-12">
-            <Card>
+            <Card className={cardClass}>
               <CardHeader>
-                <CardTitle className="flex items-center">
+                <CardTitle className="flex items-center heading-anton">
                   <Plus className="h-5 w-5 mr-2"/>
                   Add Another Account
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-[--text-secondary] body-share-tech">
                   Connect additional accounts or create new ones to switch between them easily.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-3 gap-4">
-                  <Button variant="outline" className="h-20 flex-col" asChild>
+                  <Button variant="outline" className="h-20 flex-col rounded-2xl border-[--border-default] bg-[--surface-default]" asChild>
                     <Link href="/auth/signup?type=personal">
                       <User className="h-6 w-6 mb-2"/>
                       Add Personal Account
                     </Link>
                   </Button>
 
-                  <Button variant="outline" className="h-20 flex-col">
+                  <Button variant="outline" className="h-20 flex-col rounded-2xl border-[--border-default] bg-[--surface-default]">
                     <Building className="h-6 w-6 mb-2"/>
                     Join Organization
                   </Button>
 
-                  <Button variant="outline" className="h-20 flex-col" asChild>
+                  <Button variant="outline" className="h-20 flex-col rounded-2xl border-[--border-default] bg-[--surface-default]" asChild>
                     <Link href="/auth/signup?type=professional">
                       <Briefcase className="h-6 w-6 mb-2"/>
                       Create Professional Account
@@ -541,10 +544,10 @@ export default function SwitchAccountPage() {
           </div>
 
           {/* Security Notice */}
-          <Alert className="mt-8">
+          <Alert className="mt-8 border-[--border-default] bg-[--surface-default]/90 backdrop-blur">
             <Shield className="h-4 w-4"/>
-            <AlertTitle>Account Security</AlertTitle>
-            <AlertDescription>
+            <AlertTitle className="heading-anton text-sm">Account Security</AlertTitle>
+            <AlertDescription className="body-share-tech text-[--text-secondary]">
               Switching accounts will sign you out of your current session and sign you into the selected account.
               Make sure to save any unsaved work before switching.
             </AlertDescription>
