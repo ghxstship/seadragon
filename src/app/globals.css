@@ -150,6 +150,61 @@
   --color-foreground: var(--text-primary);
 }
 
+/* -------------------------------------------------------------------------- */
+/* Auth shell theming (inherits landing palette/fonts)                       */
+/* -------------------------------------------------------------------------- */
+.auth-shell {
+  font-family: 'Share Tech', var(--font-body, sans-serif);
+  color: var(--text-primary, #1a1a1a);
+  background: transparent;
+}
+
+.auth-shell .bg-background {
+  background-color: transparent !important;
+}
+
+.auth-shell h1,
+.auth-shell h2,
+.auth-shell h3,
+.auth-shell .heading-anton {
+  font-family: 'Anton', var(--font-sans, sans-serif);
+}
+
+.auth-shell p,
+.auth-shell label,
+.auth-shell span,
+.auth-shell .body-share-tech {
+  font-family: 'Share Tech', var(--font-body, sans-serif);
+}
+
+.auth-shell .card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-default, #e5e7eb);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(6px);
+}
+
+.auth-shell button {
+  border-radius: 999px;
+  font-family: 'Share Tech', var(--font-body, sans-serif);
+}
+
+.auth-shell a {
+  color: var(--color-accent-primary, #e53935);
+}
+
+.auth-shell .muted-copy {
+  color: var(--text-muted, #6b7280);
+}
+
+.auth-shell .surface-elevated {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-default, #e5e7eb);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+}
+
 [data-brand="atlvs"] {
   --color-accent-primary: var(--accent-atlvs);
 }

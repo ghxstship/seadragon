@@ -83,21 +83,21 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
       {/* Header */}
       <Header/>
 
       {/* Login Form */}
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-md mx-auto">
-          <Card>
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl">Welcome Back</CardTitle>
-              <CardDescription>
+          <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
+            <CardHeader className="text-center space-y-2">
+              <CardTitle className="text-3xl leading-tight" style={{ fontFamily: 'Anton, var(--font-sans)' }}>Welcome Back</CardTitle>
+              <CardDescription className="text-[--text-secondary]" style={{ fontFamily: 'Share Tech, sans-serif' }}>
                 Sign in to your ATLVS + GVTEWAY account
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-5">
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Organization Slug */}
                 <div className="space-y-2">
@@ -162,27 +162,23 @@ function LoginForm() {
                 )}
 
                 {/* Submit Button */}
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button type="submit" className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5" disabled={isLoading}>
                   {isLoading ? 'Signing in...' : 'Sign In'}
                 </Button>
               </form>
 
               {/* Alternative Sign In Options */}
-              <div className="space-y-4">
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t"/>
-                  </div>
-                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-background px-2 text-muted-foreground">
-                      Or continue with
-                    </span>
-                  </div>
+              <div className="space-y-5">
+                <div className="relative flex items-center justify-center">
+                  <span className="absolute inset-x-0 h-px bg-[--border-default]" />
+                  <span className="relative bg-[--surface-default] px-3 text-[11px] uppercase tracking-[0.18em] text-[--text-muted]" style={{ fontFamily: 'Share Tech Mono, monospace' }}>
+                    Or continue with
+                  </span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                  <Button variant="outline" className="w-full" onClick={() => handleOAuthSignIn('google')}>
-                    <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
+                  <Button variant="outline" className="w-full h-11 rounded-xl border border-[--border-default] bg-white text-neutral-900 shadow-[0_6px_18px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5" onClick={() => handleOAuthSignIn('google')}>
+                    <svg className="w-4 h-4 mr-2 text-neutral-700" viewBox="0 0 24 24">
                       <path
                         fill="currentColor"
                         d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -198,15 +194,15 @@ function LoginForm() {
                     </svg>
                     Google
                   </Button>
-                  <Button variant="outline" className="w-full" onClick={() => handleOAuthSignIn('azure')}>
-                    <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <Button variant="outline" className="w-full h-11 rounded-xl border border-[--border-default] bg-white text-neutral-900 shadow-[0_6px_18px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5" onClick={() => handleOAuthSignIn('azure')}>
+                    <svg className="w-4 h-4 mr-2 text-neutral-700" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.75.098.118.112.221.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.747-1.378 0 0-.599 2.282-.744 2.84-.282 1.084-1.064 2.456-1.549 3.235C9.584 23.815 10.77 24.001 12.017 24.001c6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001.012.017z"/>
                     </svg>
                     Microsoft
                   </Button>
                 </div>
 
-                <Button variant="ghost" className="w-full text-sm" asChild>
+                <Button variant="ghost" className="w-full text-sm text-[--text-primary]" asChild>
                   <Link href="/auth/login/magic-link">
                     Send me a magic link instead
                   </Link>
@@ -217,13 +213,13 @@ function LoginForm() {
               <div className="text-center space-y-2">
                 <Link
                   href="/auth/forgot-password"
-                  className="text-sm text-accent-primary hover:underline"
+                  className="text-sm text-[--color-accent-primary] hover:underline"
                 >
                   Forgot your password?
                 </Link>
                 <div className="text-sm text-muted-foreground">
                   Don&apos;t have an account?{' '}
-                  <Link href="/auth/signup" className="text-accent-primary hover:underline">
+                  <Link href="/auth/signup" className="text-[--color-accent-primary] hover:underline">
                     Sign up
                   </Link>
                 </div>
@@ -232,9 +228,9 @@ function LoginForm() {
           </Card>
 
           {/* Demo Credentials */}
-          <Card className="mt-6">
+          <Card className="mt-6 border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
             <CardHeader>
-              <CardTitle className="text-sm flex items-center gap-2">
+              <CardTitle className="text-sm flex items-center gap-2" style={{ fontFamily: 'Share Tech, sans-serif' }}>
                 <Badge variant="secondary">Demo</Badge>
                 Test Credentials
               </CardTitle>

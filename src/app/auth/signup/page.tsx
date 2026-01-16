@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Header } from '@/lib/design-system'
 import { Eye, EyeOff, AlertCircle, CheckCircle } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -94,19 +93,19 @@ export default function SignupPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent text-[--text-primary]">
         <Header/>
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-md mx-auto">
-            <Card>
+            <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
               <CardContent className="pt-6">
                 <div className="text-center space-y-4">
-                  <CheckCircle className="h-12 w-12 text-semantic-success mx-auto"/>
-                  <h2 className="text-2xl font-bold">Account Created!</h2>
-                  <p className="text-muted-foreground">
+                  <CheckCircle className="h-12 w-12 text-[--color-accent-primary] mx-auto"/>
+                  <h2 className="text-3xl leading-tight" style={{ fontFamily: 'Anton, var(--font-sans)' }}>Account Created!</h2>
+                  <p className="text-[--text-secondary]" style={{ fontFamily: 'Share Tech, sans-serif' }}>
                     Please check your email for a verification link to complete your registration.
                   </p>
-                  <Button asChild>
+                  <Button asChild className="h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5">
                     <Link href="/auth/login">Continue to Sign In</Link>
                   </Button>
                 </div>
@@ -119,17 +118,17 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-transparent text-[--text-primary]">
       {/* Header */}
       <Header/>
 
       {/* Signup Form */}
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-md mx-auto">
-          <Card>
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl">Create Your Account</CardTitle>
-              <CardDescription>
+          <Card className="border border-[--border-default] bg-[--surface-default]/90 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
+            <CardHeader className="text-center space-y-2">
+              <CardTitle className="text-3xl leading-tight" style={{ fontFamily: 'Anton, var(--font-sans)' }}>Create Your Account</CardTitle>
+              <CardDescription className="text-[--text-secondary]" style={{ fontFamily: 'Share Tech, sans-serif' }}>
                 Join the ATLVS + GVTEWAY community
               </CardDescription>
             </CardHeader>
@@ -241,7 +240,7 @@ export default function SignupPage() {
                     )}
 
                     {/* Submit Button */}
-                    <Button type="submit" className="w-full" disabled={isLoading}>
+                    <Button type="submit" className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5" disabled={isLoading}>
                       {isLoading ? 'Creating Account...' : 'Create Account'}
                     </Button>
                   </form>
@@ -376,7 +375,7 @@ export default function SignupPage() {
                     )}
 
                     {/* Submit Button */}
-                    <Button type="submit" className="w-full" disabled={isLoading}>
+                    <Button type="submit" className="w-full h-11 rounded-full bg-[--color-accent-primary] text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5" disabled={isLoading}>
                       {isLoading ? 'Creating Account...' : 'Create Professional Account'}
                     </Button>
                   </form>
@@ -384,16 +383,16 @@ export default function SignupPage() {
               </Tabs>
 
               {/* Links */}
-              <div className="text-center space-y-2 pt-4 border-t">
-                <div className="text-sm text-muted-foreground">
+              <div className="text-center space-y-2 pt-4 border-t border-[--border-default]">
+                <div className="text-sm text-[--text-secondary]">
                   Already have an account?{' '}
-                  <Link href="/auth/login" className="text-accent-primary hover:underline">
+                  <Link href="/auth/login" className="text-[--color-accent-primary] hover:underline">
                     Sign in
                   </Link>
                 </div>
                 <Link
                   href="/legal/terms"
-                  className="text-xs text-muted-foreground hover:underline"
+                  className="text-xs text-[--text-muted] hover:underline"
                 >
                   By signing up, you agree to our Terms of Service and Privacy Policy
                 </Link>
