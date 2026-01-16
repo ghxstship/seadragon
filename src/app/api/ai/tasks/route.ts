@@ -6,9 +6,11 @@ import { createClient } from '@/lib/supabase/server'
 import OpenAI from 'openai'
 import { safeJsonParse } from '@/lib/safe-json'
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+function getOpenAI() {
+  const apiKey = process.env["OPENAI_API_KEY"]
+  if (!apiKey) return null
+  return new OpenAI({ apiKey })
+}
 
 // POST /api/ai/tasks/generate - Generate automated tasks for an event/project
 export async function POST(request: NextRequest) {
@@ -92,6 +94,11 @@ Task Type: ${type || 'comprehensive'}
 Scope: ${scope || 'full'}
 
 Please provide detailed, actionable tasks with priorities, assignees, timelines, and dependencies.`
+
+    const openai = getOpenAI()
+    if (!openai) {
+      return NextResponse.json({ error: 'OPENAI_API_KEY is not configured' }, { status: 500 })
+    }
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',

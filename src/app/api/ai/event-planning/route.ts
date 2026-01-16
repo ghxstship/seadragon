@@ -5,9 +5,11 @@ import { createClient } from '@/lib/supabase/server'
 import OpenAI from 'openai'
 import { safeJsonParse } from '@/lib/safe-json'
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+function getOpenAI() {
+  const apiKey = process.env["OPENAI_API_KEY"]
+  if (!apiKey) return null
+  return new OpenAI({ apiKey })
+}
 
 // POST /api/ai/event-planning - Generate event planning suggestions
 export async function POST(request: NextRequest) {
@@ -70,6 +72,11 @@ ${preferences ? `Preferences: ${JSON.stringify(preferences)}` : ''}
 ${constraints ? `Constraints: ${JSON.stringify(constraints)}` : ''}
 
 Please provide detailed planning recommendations including timeline, budget breakdown, technical requirements, and success metrics.`
+
+    const openai = getOpenAI()
+    if (!openai) {
+      return NextResponse.json({ error: 'OPENAI_API_KEY is not configured' }, { status: 500 })
+    }
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',

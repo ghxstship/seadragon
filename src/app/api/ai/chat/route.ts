@@ -61,9 +61,15 @@ interface ChatUser {
   name?: string | null
   email?: string | null
 }
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+function getOpenAI() {
+  const apiKey = process.env["OPENAI_API_KEY"]
+  if (!apiKey) {
+    return null
+  }
+  return new OpenAI({
+    apiKey,
+  })
+}
 
 // POST /api/ai/chat - Handle chat messages
 export async function POST(request: NextRequest) {
@@ -91,6 +97,11 @@ export async function POST(request: NextRequest) {
 
     // Create the system prompt with context
     const systemPrompt = createSystemPrompt(contextData, session.user)
+
+    const openai = getOpenAI()
+    if (!openai) {
+      return NextResponse.json({ error: "OPENAI_API_KEY is not configured" }, { status: 500 })
+    }
 
     // Call OpenAI API
     const completion = await openai.chat.completions.create({
