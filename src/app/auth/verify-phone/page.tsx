@@ -37,7 +37,7 @@ export default async function VerifyPhonePage({ searchParams }: VerifyPhonePageP
     name: session.user?.name || 'User',
     email: session.user?.email || '',
     phoneVerified: false,
-    phoneNumber: resolvedSearchParams?.phone as string || ''
+    phoneNumber: (resolvedSearchParams?.['phone'] as string) || ''
   }
 
   const countryCodes = [
