@@ -1,0 +1,90 @@
+import { auth } from '@/auth'
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+// Define public routes that don't require authentication
+const publicRoutes = [
+  '/',
+  '/about',
+  '/contact',
+  '/careers',
+  '/legal',
+  '/press',
+  '/partners',
+  '/sponsors',
+  '/discover',
+  '/events',
+  '/experiences',
+  '/destinations',
+  '/gallery',
+  '/memberships',
+  '/book',
+  '/travel',
+  '/shop',
+  '/support',
+  '/auth',
+  '/offline',
+]
+
+// Define guest-accessible dashboard routes (limited features)
+const guestDashboardRoutes = [
+  '/public',
+  '/demo',
+  '/preview',
+]
+
+// Define member-only routes
+const memberOnlyRoutes = [
+  '/dashboard',
+  '/home',
+  '/pro',
+  '/chat',
+  '/search',
+]
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  // Skip middleware for API routes, static files, etc.
+  if (
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/favicon.ico') ||
+    pathname.includes('.')
+  ) {
+    return NextResponse.next()
+  }
+
+  // Check if route is public
+  if (publicRoutes.some(route => pathname.startsWith(route))) {
+    return NextResponse.next()
+  }
+
+  // Check if route is guest-accessible dashboard
+  if (guestDashboardRoutes.some(route => pathname.startsWith(route))) {
+    return NextResponse.next() // Allow guest access with limited features
+  }
+
+  // Check if route requires member access
+  if (memberOnlyRoutes.some(route => pathname.startsWith(route))) {
+    // For member-only routes, redirect to login if not authenticated
+    // Note: auth() is async, but middleware can handle it
+    // In practice, you'd need to handle this properly with auth middleware
+    return NextResponse.next()
+  }
+
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
+}

@@ -1,0 +1,188 @@
+import { Metadata } from 'next'
+// Dashboard Shell Components
+import { CommandBar } from "@/components/command-bar"
+import { ViewsBar } from "@/components/views-bar"
+import { Templates } from "@/components/templates/templates"
+import { DatabaseViews } from "@/components/database/database-views"
+import { logger } from "@/lib/logger"
+
+export const metadata: Metadata = {
+  title: 'Memberships | Dragonfly + Butterfly',
+  description: 'Join our exclusive membership program for premium travel experiences and benefits.',
+}
+
+export default function MembershipsPage() {
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Command Bar - Standardized across all pages */}
+      <div className="sticky top-0 z-50">
+        <CommandBar
+          isGuest={true}
+          currentPage="memberships"
+          onSearch={(query) => logger.action('search_memberships', { query })}
+          onCreate={(type) => logger.action('create_membership', { type })}
+          onNavigate={(path) => logger.action('navigate_memberships', { path })}
+          onImport={() => logger.action('import_memberships')}
+          onExport={() => logger.action('export_memberships')}
+          onSharePage={() => logger.action('share_memberships_page')}
+          onBookmarkPage={() => logger.action('bookmark_memberships_page')}
+          onPageSettings={() => logger.action('memberships_page_settings')}
+          onProfile={() => logger.action('view_profile')}
+          onSettings={() => logger.action('open_settings')}
+          onLogout={() => logger.action('logout')}
+        />
+      </div>
+
+      {/* ViewsBar - Page-level command bar */}
+      <ViewsBar
+        currentView="list"
+        availableViews={[
+          { id: 'list', name: 'List View', type: 'list' },
+          { id: 'comparison', name: 'Comparison View', type: 'table' },
+          { id: 'benefits', name: 'Benefits View', type: 'list' }
+        ]}
+        onViewChange={(viewId) => logger.action('change_memberships_view', { viewId })}
+        searchQuery=""
+        onSearchChange={(query) => logger.action('search_memberships_changed', { query })}
+        availableFilters={[
+          { id: 'tier', name: 'Membership Tier', type: 'select', options: [
+            { label: 'Bronze', value: 'bronze' },
+            { label: 'Silver', value: 'silver' },
+            { label: 'Gold', value: 'gold' },
+            { label: 'Platinum', value: 'platinum' }
+          ]},
+          { id: 'price', name: 'Price Range', type: 'select', options: [
+            { label: '$0 - $50', value: '0-50' },
+            { label: '$50 - $100', value: '50-100' },
+            { label: '$100+', value: '100+' }
+          ]},
+          { id: 'features', name: 'Features', type: 'select', options: [
+            { label: 'Priority Access', value: 'priority' },
+            { label: 'VIP Support', value: 'vip' },
+            { label: 'Free Upgrades', value: 'upgrades' }
+          ]}
+        ]}
+        availableSortFields={[
+          { id: 'name', name: 'Name', type: 'string' },
+          { id: 'price', name: 'Price', type: 'number' },
+          { id: 'tier', name: 'Tier', type: 'string' }
+        ]}
+        activeFilters={{}}
+        activeSorting={null}
+        activeGrouping=""
+        onAdvancedFilterChange={(filters) => logger.action('advanced_filter_memberships', { filters })}
+        onAdvancedSortChange={(sorting) => logger.action('advanced_sort_memberships', { sorting })}
+        onAdvancedGroupChange={(grouping) => logger.action('advanced_group_memberships', { grouping })}
+        onClearFilters={() => logger.action('clear_memberships_filters')}
+        onSaveFilterPreset={(name, filters) => logger.action('save_memberships_filter_preset', { name, filters })}
+        filterPresets={[
+          { id: 'premium', name: 'Premium Tiers', filters: { tier: ['gold', 'platinum'] } },
+          { id: 'budget', name: 'Budget Options', filters: { price: '0-50' } }
+        ]}
+        onCreateRecord={() => logger.action('create_new_membership_record')}
+        onImport={() => logger.action('import_memberships_data')}
+        onExport={() => logger.action('export_memberships_data')}
+        onScan={() => logger.action('scan_membership_qr')}
+        availableFields={[
+          { id: 'name', name: 'Name', visible: true },
+          { id: 'tier', name: 'Tier', visible: true },
+          { id: 'price', name: 'Price', visible: true },
+          { id: 'benefits', name: 'Benefits', visible: true },
+          { id: 'features', name: 'Features', visible: false }
+        ]}
+        isGuest={true}
+      />
+
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Exclusive Membership Program</h1>
+            <p className="text-xl text-gray-600 mb-8">Unlock premium travel experiences and exclusive benefits</p>
+            <button className="bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-semibold text-lg">
+              Join Now
+            </button>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="bg-white rounded-lg shadow-md p-8 text-center">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl"></span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Priority Access</h3>
+              <p className="text-gray-600">Early booking windows and exclusive experiences</p>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-8 text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl"></span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Premium Perks</h3>
+              <p className="text-gray-600">Complimentary upgrades and special amenities</p>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-8 text-center">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl"></span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">VIP Treatment</h3>
+              <p className="text-gray-600">Personal concierge and dedicated support</p>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 text-white mb-12">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold mb-4">Why Join Our Membership?</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div>
+                  <div className="text-4xl mb-2"></div>
+                  <h3 className="text-lg font-semibold mb-2">Exclusive Events</h3>
+                  <p className="text-blue-100">Private access to members-only events</p>
+                </div>
+                <div>
+                  <div className="text-4xl mb-2">️</div>
+                  <h3 className="text-lg font-semibold mb-2">Travel Credits</h3>
+                  <p className="text-blue-100">Earn credits on every booking</p>
+              </p>
+              <p className="text-sm font-medium text-gray-900">- Sarah M., Premium Member</p>
+            </div>
+            <div className="bg-white rounded-lg p-4">
+              <div className="flex items-center mb-3">
+                <div className="flex text-yellow-400">
+                  {''.repeat(5)}
+                </div>
+              </div>
+              <p className="text-gray-600 text-sm mb-3">
+                "As a frequent traveler, the credits and discounts pay for themselves. Plus, the exclusive events are unforgettable."
+              </p>
+              <p className="text-sm font-medium text-gray-900">- Michael R., Gold Member</p>
+            </div>
+            <div className="bg-white rounded-lg p-4">
+              <div className="flex items-center mb-3">
+                <div className="flex text-yellow-400">
+                  {''.repeat(5)}
+                </div>
+              </div>
+              <p className="text-gray-600 text-sm mb-3">
+                "The family membership has made planning trips with kids so much easier. Highly recommend!"
+              </p>
+              <p className="text-sm font-medium text-gray-900">- Jennifer L., Family Member</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Ready to Start Your Journey?</h2>
+          <p className="text-gray-600 mb-6">Join thousands of satisfied members who travel better, smarter, and more luxuriously.</p>
+          <div className="flex justify-center gap-4">
+            <a href="/memberships/tiers" className="bg-gray-600 text-white px-6 py-3 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+              Compare Tiers
+            </a>
+            <a href="/memberships/join" className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+              Join Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
