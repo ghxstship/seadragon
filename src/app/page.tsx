@@ -95,13 +95,6 @@ const heroStats = [
   { label: "Budgets orchestrated", value: "$10M+" }
 ]
 
-const personaLabels: Record<PersonaFilter, string> = {
-  all: "All",
-  production: "Production",
-  operations: "Operations",
-  experience: "Experience"
-}
-
 const ecosystemCards: {
   id: AccentKey
   title: string
@@ -526,11 +519,20 @@ function HeroSection({ onRequestDemo, onExplore }: { onRequestDemo: () => void; 
                   { label: "Crew on shift", value: "342", tone: accents.gvteway },
                   { label: "SLA health", value: "99.2%", tone: accents.atlvs }
                 ].map(metric => (
-                  <div key={metric.label} className="rounded-lg border border-neutral-200 bg-white p-4 shadow-[0_6px_18px_rgba(0,0,0,0.12)]">
-                    <p className="text-[11px] uppercase tracking-[0.18em] text-neutral-600" style={{ fontFamily: "Share Tech Mono, monospace" }}>
+                  <div
+                    key={metric.label}
+                    className="flex min-h-[118px] flex-col items-center justify-between rounded-lg border border-neutral-200 bg-white px-4 py-3 text-center shadow-[0_6px_18px_rgba(0,0,0,0.12)]"
+                  >
+                    <p
+                      className="text-[11px] uppercase tracking-[0.18em] text-neutral-600"
+                      style={{ fontFamily: "Share Tech Mono, monospace", letterSpacing: "0.18em" }}
+                    >
                       {metric.label}
                     </p>
-                    <p className="mt-2 text-2xl font-semibold" style={{ color: metric.tone }}>
+                    <p
+                      className="text-[26px] font-semibold leading-[1.1]"
+                      style={{ color: metric.tone, fontFamily: "Anton, var(--font-sans)" }}
+                    >
                       {metric.value}
                     </p>
                   </div>
@@ -599,11 +601,7 @@ function HeroSection({ onRequestDemo, onExplore }: { onRequestDemo: () => void; 
 }
 
 function ProductsSection() {
-  const [personaFilter, setPersonaFilter] = useState<PersonaFilter>("all")
-  const [compareMode, setCompareMode] = useState(false)
-  const [peekCard, setPeekCard] = useState<AccentKey | null>(null)
-
-  const filteredCards = personaFilter === "all" ? ecosystemCards : ecosystemCards.filter(card => card.persona === personaFilter)
+  const filteredCards = ecosystemCards
 
   return (
     <section id="products" className="mt-16 space-y-8">
@@ -612,28 +610,6 @@ function ProductsSection() {
         title="Three Platforms. One Suite."
         description="A shared data, permissions, and orchestration fabric built for Production, Operations, and Experience teams."
       />
-
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-neutral-300 bg-white p-3 shadow-[0_8px_20px_rgba(0,0,0,0.06)]">
-        <div className="flex flex-wrap gap-2" role="tablist" aria-label="Product personas">
-          {Object.entries(personaLabels).map(([key, label]) => (
-            <button
-              key={key}
-              role="tab"
-              aria-selected={personaFilter === key}
-              onClick={() => setPersonaFilter(key as PersonaFilter)}
-              className={`rounded-full px-3 py-2 text-sm font-semibold transition ${
-                personaFilter === key ? "bg-neutral-900 text-white" : "bg-neutral-100 text-neutral-800 hover:bg-neutral-200"
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-        <label className="flex items-center gap-2 text-sm text-neutral-800" style={{ fontFamily: "Share Tech, sans-serif" }}>
-          <input type="checkbox" checked={compareMode} onChange={e => setCompareMode(e.target.checked)} className="h-4 w-4 rounded border-neutral-400" />
-          Compare
-        </label>
-      </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         {filteredCards.map(card => (
@@ -655,67 +631,24 @@ function ProductsSection() {
             <p className="mt-2 text-sm text-[#4a4a4a]">{card.desc}</p>
 
             <div className="mt-4 flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.14em] text-neutral-700" style={{ fontFamily: "Share Tech Mono, monospace" }}>
-              <button
-                className="rounded-full border border-neutral-300 bg-neutral-100 px-3 py-2 text-[11px] font-semibold transition hover:border-neutral-400"
-                onClick={() => setPeekCard(peekCard === card.id ? null : card.id)}
-              >
-                Workflow Peek
-              </button>
+              <span className="rounded-full border border-neutral-300 bg-neutral-100 px-3 py-2 text-[11px] font-semibold">
+                Advantages
+              </span>
             </div>
 
-            {peekCard === card.id ? (
-              <div className="mt-3 space-y-2 rounded-xl border border-neutral-200 bg-[#f7f7f7] p-3">
-                <p className="text-[11px] uppercase tracking-[0.16em] text-neutral-700" style={{ fontFamily: "Share Tech Mono, monospace" }}>
-                  {card.ctaPrimary}
-                </p>
-                <ol className="space-y-1 text-sm text-neutral-900">
-                  {card.workflow.map(step => (
-                    <li key={step} className="flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full" style={{ background: accents[card.id] }} />
-                      {step}
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            ) : null}
-
-            <div className="mt-4 flex flex-col gap-2 text-sm text-neutral-900">
-              <div className="flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-neutral-600" style={{ fontFamily: "Share Tech Mono, monospace" }}>
-                <span className="h-2 w-2 rounded-full" style={{ background: accents[card.id] }} />
-                Shared data layer guarantees
-              </div>
-              <div className="flex flex-wrap gap-2 text-xs" style={{ fontFamily: "Share Tech Mono, monospace" }}>
-                {"Permissions · Auditability · Interoperability".split(" · ").map(item => (
-                  <span key={item} className="rounded-full bg-neutral-100 px-2 py-1 text-neutral-800">
-                    {item}
-                  </span>
+            <div className="mt-4 space-y-2 rounded-xl border border-neutral-200 bg-[#f7f7f7] p-3 text-sm text-neutral-900">
+              <p className="text-[11px] uppercase tracking-[0.16em] text-neutral-700" style={{ fontFamily: "Share Tech Mono, monospace" }}>
+                Advantages of {card.title}
+              </p>
+              <ul className="space-y-1" style={{ fontFamily: "Share Tech, sans-serif" }}>
+                {[card.planning, card.execution, card.governance].map(point => (
+                  <li key={point} className="flex items-start gap-2 leading-relaxed">
+                    <span className="mt-1 h-2 w-2 rounded-full" style={{ background: accents[card.id] }} />
+                    <span>{point}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
-
-            {compareMode ? (
-              <div className="mt-4 space-y-2 rounded-xl border border-neutral-200 bg-[#f9f9f9] p-3 text-sm text-neutral-900">
-                <div className="flex items-start gap-2">
-                  <span className="text-xs uppercase tracking-[0.14em] text-neutral-600" style={{ fontFamily: "Share Tech Mono, monospace" }}>
-                    Planning
-                  </span>
-                  <p>{card.planning}</p>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="text-xs uppercase tracking-[0.14em] text-neutral-600" style={{ fontFamily: "Share Tech Mono, monospace" }}>
-                    Execution
-                  </span>
-                  <p>{card.execution}</p>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="text-xs uppercase tracking-[0.14em] text-neutral-600" style={{ fontFamily: "Share Tech Mono, monospace" }}>
-                    Governance
-                  </span>
-                  <p>{card.governance}</p>
-                </div>
-              </div>
-            ) : null}
-
             <div className="mt-4 flex flex-wrap gap-2">
               <Button className="rounded-full bg-black px-4 text-xs font-semibold text-white shadow" size="sm">
                 {card.ctaPrimary}
