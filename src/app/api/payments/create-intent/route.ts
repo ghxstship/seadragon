@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { logger } from "@/lib/logger"
 import { auth } from "@/auth"
 import { createClient } from "@/lib/supabase/server"
-import { stripe } from "@/lib/stripe"
+import { getStripe } from "@/lib/stripe"
 
 
 
@@ -71,6 +71,8 @@ export async function POST(request: NextRequest) {
         })
       }
     }
+
+    const stripe = getStripe()
 
     // Create Stripe payment intent
     const paymentIntent = await stripe.paymentIntents.create({
