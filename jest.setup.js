@@ -138,11 +138,16 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
 }))
 
 // Mock IntersectionObserver
-global.IntersectionObserver = jest.fn().mockImplementation(() => ({
-  observe: jest.fn(),
-  unobserve: jest.fn(),
-  disconnect: jest.fn(),
-}))
+global.IntersectionObserver = class MockIntersectionObserver {
+  constructor() {}
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+  get root() { return null; }
+  get rootMargin() { return ''; }
+  get thresholds() { return []; }
+  takeRecords() { return []; }
+}
 
 // Mock window.requestAnimationFrame
 global.requestAnimationFrame = jest.fn(cb => setTimeout(cb, 16))
@@ -194,5 +199,34 @@ global.testUtils = {
     data,
     timestamp: new Date(),
     ...data,
+  }),
+  createMockUser: (overrides = {}) => ({
+    id: `user_${Date.now()}`,
+    email: 'test@example.com',
+    name: 'Test User',
+    avatar: null,
+    role: 'user',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    ...overrides
+  }),
+  createMockSession: (userOverrides = {}) => ({
+    user: global.testUtils.createMockUser(userOverrides),
+    expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+    accessToken: 'test_token'
+  }),
+  createMockIntegration: (overrides = {}) => ({
+    id: `integration_${Date.now()}`,
+    providerId: 'test',
+    organizationId: `org_${Date.now()}`,
+    userId: `user_${Date.now()}`,
+    name: 'Test Integration',
+    description: 'A test integration',
+    config: {},
+    status: 'disconnected',
+    lastSync: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    ...overrides
   }),
 }
