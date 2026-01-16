@@ -165,9 +165,9 @@ const ecosystemCards: {
 ]
 
 const productTestimonials = [
-  { quote: "We trim the sails on every show—half the time, double the precision.", name: "Capt. Rowan Calder", title: "Master of Production" },
-  { quote: "Governance runs like a tight ship—orders logged, audits clear, crew aligned.", name: "Capt. Liora Marlowe", title: "Harbormaster of Operations" },
-  { quote: "Every audience voyage stays on-brand and measurable from dock to dock.", name: "Capt. Arjun Tidewell", title: "Commodore of Experience" }
+  { quote: "We cut show-day overruns in half while keeping every department on spec.", name: "Capt. Rowan Calder", title: "Master of Production" },
+  { quote: "Policies, staffing, and audits stay synced—my leads get clarity without chasing down updates.", name: "Capt. Liora Marlowe", title: "Harbormaster of Operations" },
+  { quote: "We launch audience programs with brand safety baked in—and track lift without extra tooling.", name: "Capt. Arjun Tidewell", title: "Commodore of Experience" }
 ]
 
 const solutions = [
@@ -254,7 +254,7 @@ const pricingPlans = [
     id: "pro",
     name: "Pro",
     price: "$79",
-    cadence: "per user / month",
+    cadence: "Per User / Month",
     tagline: "Lead Here",
     audience: ["Production managers", "Tour managers", "Department leads", "Vendors running sub-teams", "Embedded freelancers"],
     includes: [
@@ -272,7 +272,7 @@ const pricingPlans = [
     id: "enterprise",
     name: "Enterprise",
     price: "$1,499",
-    cadence: "starting monthly base",
+    cadence: "Starting Monthly Base",
     tagline: "Create Here",
     audience: ["Production companies", "Festivals", "Venues", "Brands", "Agencies", "Promoters", "Municipalities"],
     includes: [
