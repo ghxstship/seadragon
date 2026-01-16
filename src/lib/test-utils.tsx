@@ -6,8 +6,8 @@
  */
 
 import React from 'react'
-import { render, screen, fireEvent, waitFor, within, RenderOptions } from '@testing-library/react'
-import { renderHook, act } from '@testing-library/react-hooks'
+import '@testing-library/jest-dom'
+import { render, screen, fireEvent, waitFor, within, RenderOptions, renderHook, act } from '@testing-library/react'
 import { jest } from '@jest/globals'
 
 import { User, Profile, Event as DbEvent, Project, Task, Workspace, Notification, Organization } from './db/index'
@@ -16,7 +16,7 @@ import { User, Profile, Event as DbEvent, Project, Task, Workspace, Notification
 // DATA GENERATORS (NO MOCK DATA - PRODUCTION READY)
 // =============================================================================
 
-interface TestIntegration {
+export interface TestIntegration {
   id: string
   providerId: string
   organizationId: string
@@ -385,14 +385,6 @@ export const setupTestEnvironment = () => {
     })),
   })
 
-  // Mock IntersectionObserver
-  global.IntersectionObserver = class IntersectionObserver {
-    constructor() {}
-    observe() { return null }
-    disconnect() { return null }
-    unobserve() { return null }
-  }
-
   // Mock ResizeObserver
   global.ResizeObserver = class ResizeObserver {
     constructor() {}
@@ -406,10 +398,9 @@ export const setupTestEnvironment = () => {
 // TYPE DEFINITIONS FOR TESTING
 // =============================================================================
 
-export interface TestUser extends ReturnType<typeof createMockUser> {}
-export interface TestSession extends ReturnType<typeof createMockSession> {}
-export interface TestEvent extends ReturnType<typeof createMockEvent> {}
-export interface TestIntegration extends ReturnType<typeof createMockIntegration> {}
+export interface TestUser extends ReturnType<typeof createTestUser> {}
+export interface TestSession extends ReturnType<typeof createTestSession> {}
+export interface TestEvent extends ReturnType<typeof createTestEvent> {}
 
 // Export common testing utilities
 export {
@@ -420,6 +411,4 @@ export {
   act
 } from '@testing-library/react'
 
-export {
-  renderHook
-} from '@testing-library/react-hooks'
+export { renderHook } from '@testing-library/react'

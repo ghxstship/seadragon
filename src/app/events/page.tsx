@@ -1,15 +1,14 @@
 
 'use client'
 
+import React, { useState, useEffect } from 'react'
 import { logger } from '@/lib/logger'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar } from "@/components/ui/calendar"
+import { Button } from "@/components/ui/button"
 import { Header } from "@/lib/design-system"
 import { CommandBar } from "@/components/command-bar"
 import { ViewsBar } from "@/components/views-bar"
-import { Templates } from "@/components/templates/templates"
-import { DatabaseViews } from "@/components/database/database-views"
 
 interface EventApiResponse {
   id: string | number
@@ -44,25 +43,8 @@ interface EventData {
   lineup: string[]
 }
 
-interface EventData {
-  slug: string
-  name: string
-  description: string
-  date: string
-  endDate?: string
-  venue: string
-  capacity: number
-  status: string
-  featured: boolean
-  ticketPrice: number
-  images: string[]
-  categories: string[]
-  lineup: string[]
-}
-
 export default function Events() {
   const [events, setEvents] = useState<EventData[]>([])
-  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     let cancelled = false
@@ -90,19 +72,16 @@ export default function Events() {
           }))
           if (!cancelled) {
             setEvents(mapped)
-            setIsLoading(false)
           }
         } else {
           if (!cancelled) {
             setEvents([])
-            setIsLoading(false)
           }
         }
       } catch (error) {
         logger.error('Error loading events:', error)
         if (!cancelled) {
           setEvents([])
-          setIsLoading(false)
         }
       }
     }
@@ -115,7 +94,6 @@ export default function Events() {
   }, [])
 
   const upcomingEvents = events.filter(event => !event.date || new Date(event.date) > new Date())
-  const pastEvents = events.filter(event => event.date && new Date(event.date) <= new Date())
 
   return (
     <div className="min-h-screen bg-background">
